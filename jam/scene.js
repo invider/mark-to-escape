@@ -545,6 +545,7 @@ _scene.load = function(src, target, ext) {
     } else if (ext === 'csv') {
         // TODO how to load that? only AJAX?
     } else if (ext === 'js') {
+        src += "?" + Math.random() // fix cache issue
         _scene.log.debug('loading script: ' + src)
         scene.res._resIncluded ++
         var script = document.createElement('script');
