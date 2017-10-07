@@ -11,13 +11,16 @@ this['@lib/spawnLevel'] = function(lvl){
         '>': 'rightSpawn'
     };
 
-    return this._.lib.parser.parse(this._.selectOne("lib/levels/level" + lvl), function(x, y, type, params){
+    return this._.lib.parser.parse(this._.selectOne("lib/levels/level" + lvl), function(x, y, type, params) {
         let dna = typeMap[type];
         if (dna){
-            let objectToSpawn = my._.sys.spawn('dna/' + dna, 'lab/camera', {
+            let entity = my._.sys.spawn('dna/' + dna, 'lab/camera', {
                 x: x,
                 y: y,
             });
+            if (dna === 'dude') {
+                my._.lab.camera.follow(entity)
+            }
         }
     });
 };

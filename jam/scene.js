@@ -266,26 +266,18 @@ Mod.prototype.onAttached = function(node) {
 }
 
 Mod.prototype.evolve = function(delta) {
-    try {
-        this.lab._ls.map( function(e) {
-            if (e.evo && !e.dead && !e.paused) e.evo(_scene, delta)
-        });
-    } catch (e) {
-        this.log.err(e.msg)
-    }
+    this.lab._ls.map( function(e) {
+        if (e.evo && !e.dead && !e.paused) e.evo(_scene, delta)
+    });
 }
 
 Mod.prototype.draw = function(ctx, delta) {
-    try {
-        // draw actors
-        for (var i = 0; i < this.lab._ls.length; i++) {
-            let e = this.lab._ls[i]
-            if (e.draw && !e.dead && !e.hidden) {
-                e.draw(ctx)
-            }
+    // draw actors
+    for (var i = 0; i < this.lab._ls.length; i++) {
+        let e = this.lab._ls[i]
+        if (e.draw && !e.dead && !e.hidden) {
+            e.draw(ctx)
         }
-    } catch (e) {
-        this.log.err(e.msg)
     }
 }
 
@@ -693,7 +685,7 @@ function cycle() {
             }
             window.requestAnimFrame(cycle)
         } catch (e) {
-            _scene.log.err(e.msg)
+            _scene.log.err(e)
         }
         return
     }

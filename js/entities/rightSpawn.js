@@ -24,7 +24,7 @@
             evo: function (scene, delta) {
                 this.dt += delta;
                 if (this.dt >= this.timeToSpawn && this.spawned < this.toSpawn) {
-                    this.spawnDude(x, y);
+                    this.spawnDude(this.x, this.y);
                     this.spawned++;
                 }
             },
