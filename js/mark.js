@@ -5,7 +5,12 @@ _boot$game = function(_) {
 
 _setup$game = function(_) {
     _.log.out('setup game logic - copy to dna -> lab')
-
+    _.lib.parser.parse(_.lib.levels.leve1, function(x, y, type, params){
+        if (type == '*'){
+            console.log("Spawning:", x, y, type, params)
+            _.sys.spawn('dna/levelWall', 'lab');
+        }
+    });
     _.sys.spawn('dna/dot', 'lab')
     _.sys.spawn('dna/dot', 'lab')
     _.sys.spawn('dna/dot', 'lab')
@@ -17,7 +22,9 @@ _setup$game = function(_) {
     _.lab.camera.target={x:50, y:50}
 
     _.sys.spawn('dna/dot', 'lab/camera')
-}
+
+
+};
 
 // background
 this['@lab/background'] = {
