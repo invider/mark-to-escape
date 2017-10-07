@@ -9,16 +9,9 @@ _setup$game = function(_) {
     _.sys.spawn('dna/camera', 'lab')
     _.lab.camera.viewport(65,11);
 
-    let levelParams = _.lib.parser.parse(_.lib.levels.leve1, function(x, y, type, params){
-        if (type == '*'){
-            console.log("Spawning:", x, y, type, params)
-            let e = _.sys.spawn('dna/levelWall', 'lab/camera');
-            e.x = x
-            e.y = y
-        }
-    });
+    let levelParams = _.lib.spawnLevel(1);
     
-    _.sys.spawn('dna/dot', 'lab/camera')
+    _.sys.spawn('dna/dot', 'lab/camera');
     _.lab.camera.follow({x:levelParams.w/2, y:levelParams.h/2})
 }
 
@@ -29,7 +22,7 @@ this['@lab/background'] = {
         ctx.fillStyle = "#220044"
         ctx.fillRect(0, 0, canvas.width, canvas.height)
     }
-}
+};
 
 // dot actor
 this['@dna/dot'] = function() {
