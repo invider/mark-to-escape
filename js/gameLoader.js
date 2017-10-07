@@ -1,4 +1,5 @@
 "use strict"
+/*
 var _boot$gameLogic = function(_) {
     _.log.out('loading levels')
     // load all dna and libraries
@@ -7,3 +8,4 @@ var _boot$gameLogic = function(_) {
     //_.load(_.env.basepath + 'sys.js')
     //_.load(_.env.basepath + 'lib/math.js')
 };
+*/
