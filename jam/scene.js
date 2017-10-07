@@ -426,7 +426,11 @@ _scene.scan = function(target) {
             let node = target[key]
             if (isFun(node)) {
                 _scene.log.debug('executing: ' + key)
-                node(_scene)
+                try{
+                    node(_scene)
+                } catch (e){
+                    console.error("Error while starting", e);
+                }
                 target[key] = false
             }
 
