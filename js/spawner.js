@@ -7,7 +7,7 @@ this['@lib/spawnLevel'] = function(lvl){
     var typeMap = {
         '*': 'levelWall',
         'w': 'wall',
-        '@': 'dude',
+        '@': 'player',
         '>': 'rightSpawn'
     };
 
@@ -18,7 +18,7 @@ this['@lib/spawnLevel'] = function(lvl){
                 x: x,
                 y: y,
             });
-            if (dna === 'dude') {
+            if (dna === 'player') {
                 my._.lab.camera.follow(entity)
             }
         }
