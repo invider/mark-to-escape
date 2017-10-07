@@ -12,6 +12,7 @@ var _boot$gameLogic = function(_) {
     _.load(__basePath + 'spawner.js');
     _.load(__basePath + 'entities/wall.js');
     _.load(__basePath + 'entities/exit.js');
+    _.load(__basePath + 'entities/mark.js');
     _.load(__basePath + 'entities/levelWall.js');
     _.load(__basePath + 'entities/rightSpawn.js');
 };
