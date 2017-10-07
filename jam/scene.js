@@ -319,6 +319,10 @@ _scene.attach(new Frame({
     _resLoaded: 0,
 }))
 
+_scene.attach(new Frame({
+    name: 'setup'
+}))
+
 // *******************
 // scene manipulations
 
@@ -403,6 +407,11 @@ _scene.packDeclarations = function(target) {
         if (key.startsWith('_boot$') || key.startsWith('_patch$') || key.indexOf('@') >= 0) {
             pak[key] = target[key]
             target[key] = false
+        } else if (key.startsWith('_setup$')) {
+            let fn = target[key]
+            if (isFun(fn)) {
+                _scene.setup.attach(fn)
+            }
         }
     }
 }
@@ -562,8 +571,7 @@ _scene.sys.attach(isArray)
 _scene.sys.attach(isMutable)
 _scene.sys.attach(isFrame)
 
-
-
+_scene.env.started = false
 _scene.env.TARGET_FPS = 60
 _scene.env.MAX_EVO_STEP = 0.025
 _scene.env.MAX_EVO_PER_CYCLE = 0.3
@@ -571,7 +579,6 @@ _scene.env.lastFrame = Date.now()
 _scene.env.mouseX = 0
 _scene.env.mouseY = 0
 _scene.env.keys = {}  // down key set
-
 
 
 
@@ -657,6 +664,22 @@ function expandCanvas() {
 function cycle() {
     var now = Date.now()
     var delta = (now - _scene.env.lastFrame)/1000
+
+    // loading/setup actions
+    // TODO make loading screen mod possible
+    if (!_scene.env.started) {
+        if (_scene.res._resIncluded > _scene.res._resLoaded) {
+            // wait more
+        }  else {
+            // OK - everything is loaded, call setup functions
+            _scene.setup._ls.forEach(function(f) {
+                f(_scene)
+            })
+            _scene.env.started = true
+        }
+        window.requestAnimFrame(cycle)
+        return
+    }
 
     // show, react and update cycle
     _scene.draw(ctx, delta)

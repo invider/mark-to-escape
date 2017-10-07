@@ -1,3 +1,12 @@
+// some boot actions
+_boot$game = function(_) {
+    _.log.out('boot game logic')
+}
+
+_setup$game = function(_) {
+    _.log.out('setup game logic')
+}
+
 
 // dot actor
 this['@lab/dot'] = {
@@ -35,4 +44,5 @@ this['@lab/dot'] = {
         ctx.fillStyle="#FF0000";
         ctx.fillRect(this.x, this.y, 3, 3); 
     }
+
 }
