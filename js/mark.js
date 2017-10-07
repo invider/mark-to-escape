@@ -10,6 +10,13 @@ _setup$game = function(_) {
     _.sys.spawn('dna/dot', 'lab')
     _.sys.spawn('dna/dot', 'lab')
     _.sys.spawn('dna/dot', 'lab')
+
+    
+    _.sys.spawn('dna/camera', 'lab')
+    _.lab.camera.scale=4;
+    _.lab.camera.target={x:50, y:50}
+
+    _.sys.spawn('dna/dot', 'lab/camera')
 }
 
 // background
