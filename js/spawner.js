@@ -4,15 +4,21 @@
  */
 this['@lib/spawnLevel'] = function(lvl){
     var my = this;
+    var typeMap = {
+        '*': 'levelWall',
+        'w': 'wall',
+        '@': 'dude',
+    }
+
     return this._.lib.parser.parse(this._.selectOne("lib/levels/level" + lvl), function(x, y, type, params){
-        var objectToSpawn = false;
-        if (type == '*'){
-            console.log("Spawning:", x, y, type, params);
-            objectToSpawn = my._.sys.spawn('dna/levelWall', 'lab/camera');
-        }
-        if (objectToSpawn){
-            objectToSpawn.x = x;
-            objectToSpawn.y = y;
+        let dna = typeMap[type];
+        if (dna){
+            let objectToSpawn = my._.sys.spawn('dna/' + dna, 'lab/camera', {
+                x: x,
+                y: y,
+            });
+            //objectToSpawn.x = x;
+            //objectToSpawn.y = y;
         }
     });
 };
