@@ -113,7 +113,11 @@
         return settings;
     };
     this["@lib/parser/parse"] = function(lvl, cb){
-        return parser(lvl, this._.selectOne(this["@lib/parser/globalMacros"]), cb);
+        var parsed = parser(lvl, this._.selectOne("@lib/parser/globalMacros"), cb);
+        for (var k in parsed){
+            this._.patch(this._, k, parsed[k]);
+        }
+        return parsed;
     };
     // var settings = parser("a=1\nb=0^^^SETTINGS^^^", "", function(x, y, s, p){
     //     console.log(x, y, s, p);
