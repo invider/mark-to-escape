@@ -11,8 +11,8 @@ _setup$game = function(_) {
 
     let levelParams = _.lib.spawnLevel(1);
     
-    _.sys.spawn('dna/dot', 'lab/camera');
-    _.lab.camera.follow({x:levelParams.w/2, y:levelParams.h/2})
+    _.sys.spawn('dna/dot', 'lab/camera')
+    _.lab.camera.follow({x:levelParams.w/2, y:levelParams.h/2}).showOrigin()
 }
 
 // background
