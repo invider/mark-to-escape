@@ -14,6 +14,7 @@ var _boot$loadLevels = function(_){
 //  ^ - up dude spawn
 //  v - down dude spawn
 //  w - regular wall
-//  M - macro in format: M(Letter) symbols
+//  M - macro in format: M_Letter_symbols
 //  Space - empty cell
+//  \n - horizontal level end
 //

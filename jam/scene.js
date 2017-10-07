@@ -93,7 +93,7 @@ Frame.prototype.attach = function(node, name) {
     if (isObj(node) || isFun(node)) {
         node._ = this._
         node.__ = this
-        if (name) node.name = name
+        if (name && isObj(node)) node.name = name
         if (!name && node.name) name = node.name
 	}
 
