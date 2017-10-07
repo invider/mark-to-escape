@@ -1,5 +1,5 @@
 "use strict"
-var _boot$gameLogic = function() {
+var _boot$gameLogic = function(_) {
     _.log.out('loading levels')
     // load all dna and libraries
     //_.log.debug('gameloader.js',  'loading game...')

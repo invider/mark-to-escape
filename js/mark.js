@@ -4,12 +4,14 @@ _boot$game = function(_) {
 }
 
 _setup$game = function(_) {
-    _.log.out('setup game logic')
+    _.log.out('setup game logic - copy to dna -> lab')
+
+    _.sys.cp(_, 'dna/dot', 'lab')
 }
 
 
 // dot actor
-this['@lab/dot'] = {
+this['@dna/dot'] = {
 
     // state
     dt: 0,
