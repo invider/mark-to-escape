@@ -15,6 +15,10 @@ var _boot$loadLevels = function(_){
 //  v - down dude spawn
 //  w - regular wall
 //  M - macro in format: M_Letter_symbols
+//  U - Turn UP mark
+//  D - Turn Down mark
+//  L - Turn Left mark
+//  R - Turn Right mark
 //  Space - empty cell
 //  \n - horizontal level end
 //

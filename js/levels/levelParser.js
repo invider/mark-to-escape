@@ -2,7 +2,19 @@
     const MACRO_CODE_SPLITTER = "_";
     const MACRO_DELIMITER = ";";
     const LEVEL_DELIMITER = "\n";
-
+    const SETTINGS_DELIMITER = "\n";
+    const LEVEL_SETTINGS_DELIMITER = "^^^SETTINGS^^^";
+    const LEVEL_MACROS_DELIMITER = "^^^MACROS^^^";
+    var parseSection = function(lvl, type){
+        var cchunks = lvl.split(type);
+        if (cchunks.length == 1){
+            return {lvl: lvl, section:""};
+        }
+        if (cchunks.length != 2){
+            throw new Error("Wrong level format:" + lvl)
+        }
+        return {lvl: cchunks[1], section:cchunks[0]};
+    };
     var parseMacro = function (macro) {
         if (macro[0] != 'M'){
             return macro;
@@ -17,8 +29,26 @@
         }
     };
 
+    var parseSettings = function(settings){
+        var res = {};
+        settings
+            .split(SETTINGS_DELIMITER)
+            .map(f => f.trim())
+            .filter(f => f.length)
+            .map(function(f){
+                var chunks = f.split("=");
+                if (chunks.length != 2){
+                    throw new Error("Error setting:" + f);
+                }
+                return {name:chunks[0], value: chunks[1]};
+            })
+            .forEach(function(s){
+                res[s.name] = s.value;
+            });
+        return res;
+    };
+
     var applyAndParse = function (lvl, macro){
-        macro = macro || "";
         var macrosObject = {};
         macro
             .split(MACRO_DELIMITER)
@@ -49,10 +79,20 @@
     };
 
     var parser = function(lvl, macro, cb){
+
+        macro = macro || "";
+        var settingsParse = parseSection(lvl, LEVEL_SETTINGS_DELIMITER);
+        var settings = parseSettings(settingsParse.section);
+        lvl = settingsParse.lvl;
+        var macroParse = parseSection(lvl, LEVEL_MACROS_DELIMITER);
+        lvl = macroParse.lvl;
+        var macro = macro + "\n" + macroParse.section;
+
         var y = 0;
         var params = {
             w: 0,
-            h: 0
+            h: 0,
+            settings: settings
         };
         var parsed = applyAndParse(lvl, macro);
         params.h = parsed.length;
@@ -70,8 +110,13 @@
             });
             y++;
         });
+        return settings;
     };
     this["@lib/parser/parse"] = parser;
+    // var settings = parser("a=1\nb=0^^^SETTINGS^^^", "", function(x, y, s, p){
+    //     console.log(x, y, s, p);
+    // });
+    // console.log("Settings:", settings);
 })();
 
 
