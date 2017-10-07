@@ -1,7 +1,21 @@
 this['@dna/camera'] = function() {
 
+	var viewport = { w: 10, h: 10 };
+	var location = { x:0, y:0 };
+	
 	return new $.sys.Frame({
 		name: 'camera',
+		
+		viewport: function(w, h) {
+			viewport.w = w;
+			viewport.h = h;
+			return this;
+		},
+		
+		follow: function(target) {
+			location = target || { x:0, y:0 };
+			return this;
+		},
 		
 		evo: function(scene, dt) {
 			this._ls.forEach(function(e) {
@@ -11,16 +25,13 @@ this['@dna/camera'] = function() {
 	
 		draw: function(ctx) {
 			ctx.save()
-			ctx.translate(canvas.width/2, canvas.height/2)
+			var sw = canvas.width;
+			var sh = canvas.height;
+			ctx.translate(sw/2, sh/2);
 	   
-			if(this.scale) {
-				ctx.scale(this.scale, this.scale)
-			}
-	   
-			var target = this.target
-			if(target && target.x && target.y) {
-				ctx.translate(-target.x, -target.y)
-			}
+			var scale = Math.min( sw/viewport.w, sh/viewport.h );
+			ctx.scale(scale, scale);
+			ctx.translate(-location.x, -location.y)
 	    
 			this._ls.forEach(function(e) {
 				e.draw(ctx)
