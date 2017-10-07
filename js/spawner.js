@@ -17,8 +17,6 @@ this['@lib/spawnLevel'] = function(lvl){
                 x: x,
                 y: y,
             });
-            //objectToSpawn.x = x;
-            //objectToSpawn.y = y;
         }
     });
 };
