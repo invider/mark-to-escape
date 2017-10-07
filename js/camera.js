@@ -2,6 +2,7 @@ this['@dna/camera'] = function() {
 
 	var viewport = { w: 10, h: 10 };
 	var location = { x:0, y:0 };
+	var origin = false;
 	
 	return new $.sys.Frame({
 		name: 'camera',
@@ -14,6 +15,11 @@ this['@dna/camera'] = function() {
 		
 		follow: function(target) {
 			location = target || { x:0, y:0 };
+			return this;
+		},
+		
+		showOrigin: function() {
+			origin = true;
 			return this;
 		},
 		
@@ -37,9 +43,19 @@ this['@dna/camera'] = function() {
 				e.draw(ctx)
 			})
 	   
-			ctx.fillStyle = '#00ff00';
-			ctx.fillRect(-1,-1,2,2);
-	   
+			if(origin) {
+				ctx.scale(1/scale, 1/scale);
+				ctx.strokeStyle = '#ffffff';
+				ctx.lineWidth=3
+				ctx.beginPath();
+				ctx.moveTo(0,-sh/2);
+				ctx.lineTo(0,sh/2);
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.moveTo(-sw/2,0);
+				ctx.lineTo(sw/2,0);
+				ctx.stroke();
+			}
 			ctx.restore()
 		}
 	})

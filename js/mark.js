@@ -14,7 +14,7 @@ _setup$game = function(_) {
     
     _.sys.spawn('dna/camera', 'lab')
     _.sys.spawn('dna/dot', 'lab/camera')
-    _.lab.camera.viewport(10,10);
+    _.lab.camera.viewport(20,20);
     _.lab.camera.follow({x:3, y:3})
 }
 
