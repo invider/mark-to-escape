@@ -44,5 +44,3 @@ this['@dna/dude'] = function(_, dat) {
     }
 
 };
-
-
