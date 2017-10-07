@@ -14,7 +14,7 @@
             name: 'spawn-' + this._serial,
             // state
             dt: 0,
-            timeToSpawn: 10,
+            timeToSpawn: 2,
             x: dat.x,
             y: dat.y,
             spawned: 0,
@@ -24,11 +24,11 @@
             evo: function (scene, delta) {
                 this.dt += delta;
                 if (this.dt >= this.timeToSpawn && this.spawned < this.toSpawn) {
-                    this.spawnDude();
+                    this.spawnDude(x, y);
                     this.spawned++;
                 }
             },
-            spawnDude: function () {
+            spawnDude: function (x, y) {
                 let pos = {
                     x: x,
                     y: y,
