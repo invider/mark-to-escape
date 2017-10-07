@@ -8,7 +8,8 @@ this['@lib/spawnLevel'] = function(lvl){
         '*': 'levelWall',
         'w': 'wall',
         '@': 'dude',
-    }
+        '>': 'rightSpawn'
+    };
 
     return this._.lib.parser.parse(this._.selectOne("lib/levels/level" + lvl), function(x, y, type, params){
         let dna = typeMap[type];
