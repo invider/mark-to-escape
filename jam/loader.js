@@ -6,7 +6,4 @@ var _boot$ = function(_) {
 
     _.load(_.env.basepath + 'sys.js')
     _.load(_.env.basepath + 'lib/math.js')
-    if (typeof _boot$gameLogic != "undefined"){
-        _boot$gameLogic();
-    }
 };
