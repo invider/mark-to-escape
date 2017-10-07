@@ -9,6 +9,7 @@ var _boot$loadLevels = function(_){
 //
 //  @ - Player spawn
 //  X - exit
+//  * - level wall
 //  < - left dude spawn
 //  > - right dude spawn
 //  ^ - up dude spawn

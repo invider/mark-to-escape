@@ -6,16 +6,20 @@ _boot$game = function(_) {
 _setup$game = function(_) {
     _.log.out('setup game logic - copy to dna -> lab')
 
-    _.sys.spawn('dna/dot', 'lab')
-    _.sys.spawn('dna/dot', 'lab')
-    _.sys.spawn('dna/dot', 'lab')
-    _.sys.spawn('dna/dot', 'lab')
-
-    
     _.sys.spawn('dna/camera', 'lab')
+    _.lab.camera.viewport(65,11);
+
+    let levelParams = _.lib.parser.parse(_.lib.levels.leve1, function(x, y, type, params){
+        if (type == '*'){
+            console.log("Spawning:", x, y, type, params)
+            let e = _.sys.spawn('dna/levelWall', 'lab/camera');
+            e.x = x
+            e.y = y
+        }
+    });
+    
     _.sys.spawn('dna/dot', 'lab/camera')
-    _.lab.camera.viewport(20,20);
-    _.lab.camera.follow({x:3, y:3})
+    _.lab.camera.follow({x:levelParams.w/2, y:levelParams.h/2}).showOrigin()
 }
 
 // background

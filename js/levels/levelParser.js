@@ -110,7 +110,7 @@
             });
             y++;
         });
-        return settings;
+        return params;
     };
     this["@lib/parser/parse"] = function(lvl, cb){
         var parsed = parser(lvl, this._.selectOne("@lib/parser/globalMacros"), cb);

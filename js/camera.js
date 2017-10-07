@@ -45,17 +45,21 @@ this['@dna/camera'] = function() {
 	   
 			if(origin) {
 				ctx.scale(1/scale, 1/scale);
-				ctx.strokeStyle = '#ffffff';
-				ctx.lineWidth=3
+				ctx.strokeStyle = '#ff1111';
+				ctx.setLineDash([15,10])
+				ctx.lineWidth = 3
+				
 				ctx.beginPath();
-				ctx.moveTo(0,-sh/2);
-				ctx.lineTo(0,sh/2);
+				ctx.moveTo(0, -sh);
+				ctx.lineTo(0, sh);
 				ctx.stroke();
+				
 				ctx.beginPath();
-				ctx.moveTo(-sw/2,0);
-				ctx.lineTo(sw/2,0);
+				ctx.moveTo(-sw, 0);
+				ctx.lineTo(sw, 0);
 				ctx.stroke();
 			}
+			
 			ctx.restore()
 		}
 	})
