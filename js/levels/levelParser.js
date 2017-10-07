@@ -5,7 +5,7 @@
     const SETTINGS_DELIMITER = "\n";
     const LEVEL_SETTINGS_DELIMITER = "^^^SETTINGS^^^";
     const LEVEL_MACROS_DELIMITER = "^^^MACROS^^^";
-    const PARAMETRIC_RE = /[a-zA-Z]([0-9]+)/;
+    const PARAMETRIC_RE = /[a-zA-Z@\.\,]([0-9]+)/;
     var parseSection = function(lvl, type){
         var cchunks = lvl.split(type);
         if (cchunks.length == 1){

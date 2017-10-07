@@ -23,7 +23,7 @@
             evo: function (scene, delta) {
                 this.dt += delta;
                 if (this.dt >= this.timeToSpawn && this.spawned < this.toSpawn) {
-                    this.dt = 0;    
+                    this.dt = 0;
                     this.spawnDude();
                     this.spawned++;
                 }
@@ -48,7 +48,6 @@
                         pos.x += 1;
                         break;
                 }
-                debugger;
                 let spawned = this._.sys.spawn('dna/dude', 'lab/camera', pos);
             },
             // show the dot
