@@ -39,8 +39,10 @@ return {
 
         if (!this._.sys.isFrame(dest)) return false
         if (!this._.sys.isFun(cons)) return false
-        dest.attach(cons())
-        return true
+
+        let res = cons()
+        dest.attach(res)
+        return res
     }
 }
 
