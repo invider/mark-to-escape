@@ -8,7 +8,6 @@
 
         if (!this._serial) this._serial = 1;
         else this._serial++;
-
         return {
 
             name: 'spawn-' + this._serial,
@@ -19,20 +18,21 @@
             y: dat.y,
             spawned: 0,
             toSpawn: 10,
-            direction: this.direction,
+            direction: arguments.callee.direction,
             // evolve
             evo: function (scene, delta) {
                 this.dt += delta;
                 if (this.dt >= this.timeToSpawn && this.spawned < this.toSpawn) {
-                    this.spawnDude(this.x, this.y);
+                    this.dt = 0;    
+                    this.spawnDude();
                     this.spawned++;
                 }
             },
-            spawnDude: function (x, y) {
+            spawnDude: function () {
                 let pos = {
-                    x: x,
-                    y: y,
-                    dir: this.dir
+                    x: this.x,
+                    y: this.y,
+                    direction: this.direction
                 };
                 switch (this.direction){
                     case UP:
@@ -48,6 +48,7 @@
                         pos.x += 1;
                         break;
                 }
+                debugger;
                 let spawned = this._.sys.spawn('dna/dude', 'lab/camera', pos);
             },
             // show the dot
