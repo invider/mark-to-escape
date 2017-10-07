@@ -298,6 +298,7 @@ _scene.attach(new Frame({
     name: 'log',
     err: function(msg, post) {
         post? console.log('! [' + msg + '] ' + post) : console.log('! ' + msg) 
+        console.dir(msg)
     },
     out: function(msg, post) {
         post? console.log('> [' + msg + '] ' + post) : console.log('> ' + msg) 
@@ -426,11 +427,7 @@ _scene.scan = function(target) {
             let node = target[key]
             if (isFun(node)) {
                 _scene.log.debug('executing: ' + key)
-                try{
-                    node(_scene)
-                } catch (e){
-                    console.error("Error while starting", e);
-                }
+                node(_scene)
                 target[key] = false
             }
 
@@ -593,62 +590,58 @@ _scene.env.keys = {}  // down key set
 // main scene lifecycle - bootstrap, cycle[evo, draw]
 
 function bootstrap() {
-    try {
-        // pack existing declarations in global scope first
-        _scene.packDeclarations()
+    // pack existing declarations in global scope first
+    _scene.packDeclarations()
 
-        // load other parts of the framework
-        _scene.load(_scene.env.basepath + 'loader.js')
-        //_scene.scan()
+    // load other parts of the framework
+    _scene.load(_scene.env.basepath + 'loader.js')
+    //_scene.scan()
 
-        // load custom declarations packed before
-        // TODO - maybe a better way to postpone it? scripts are loaded async
-        //        so we need an event when core is loaded for that
-        _scene.scan(window._def$)
-        
-        // binding to the graphical context by convention
-        canvas = document.getElementById("canvas")
-        if (canvas == null) {
-            // precreated canvas is not found, so create one
-            canvas = document.createElement('canvas');
-            canvas.id = 'canvas';
-            canvas.style.zIndex   = 1;
-            canvas.style.border   = "0px";
-            canvas.style.margin = "0px";
-            canvas.style.padding = "0px";
-            canvas.style.position = "absolute";
-            canvas.style.display = "block";
-            document.body.appendChild(canvas);
-            cname = "canvas"
+    // load custom declarations packed before
+    // TODO - maybe a better way to postpone it? scripts are loaded async
+    //        so we need an event when core is loaded for that
+    _scene.scan(window._def$)
+    
+    // binding to the graphical context by convention
+    canvas = document.getElementById("canvas")
+    if (canvas == null) {
+        // precreated canvas is not found, so create one
+        canvas = document.createElement('canvas');
+        canvas.id = 'canvas';
+        canvas.style.zIndex   = 1;
+        canvas.style.border   = "0px";
+        canvas.style.margin = "0px";
+        canvas.style.padding = "0px";
+        canvas.style.position = "absolute";
+        canvas.style.display = "block";
+        document.body.appendChild(canvas);
+        cname = "canvas"
 
-            // setup body
-            document.body.style.margin = "0"
-            document.body.style.padding = "0"
-        } else {
-            cname = "canvas"
-        }
-        ctx = canvas.getContext("2d")
-        
-        //canvas.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT); //Chrome
-        //canvas.mozRequestFullScreen(); //Firefox
-        //canvas.msRequestFullscreen();
-        //canvas.requestFullscreen();
-
-        expandCanvas()
-
-        // initiate the game loop
-		window.requestAnimFrame(cycle)
-		/*
-		// old-fasioned way to setup animation
-        if (_scene.env.TARGET_FPS <= 0) {
-            setInterval(cycle, 1)
-        } else {
-            setInterval(cycle, 1000/_scene.env.TARGET_FPS)
-        }
-		*/
-    } catch (e) {
-        _scene.log.err('error during bootstrap: ' + e)
+        // setup body
+        document.body.style.margin = "0"
+        document.body.style.padding = "0"
+    } else {
+        cname = "canvas"
     }
+    ctx = canvas.getContext("2d")
+    
+    //canvas.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT); //Chrome
+    //canvas.mozRequestFullScreen(); //Firefox
+    //canvas.msRequestFullscreen();
+    //canvas.requestFullscreen();
+
+    expandCanvas()
+
+    // initiate the game loop
+    window.requestAnimFrame(cycle)
+    /*
+    // old-fasioned way to setup animation
+    if (_scene.env.TARGET_FPS <= 0) {
+        setInterval(cycle, 1)
+    } else {
+        setInterval(cycle, 1000/_scene.env.TARGET_FPS)
+    }
+    */
 }
 
 // > implement 'keepOriginalAspectRatio'&'aspectRatio' option

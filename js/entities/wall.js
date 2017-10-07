@@ -6,6 +6,7 @@ this['@dna/wall'] = function(_, dat) {
 
     return {
         name: 'dot-' + this._serial,
+        solid: true,
         // state
         dt: 0,
         x: dat.x,
