@@ -1,5 +1,5 @@
 // dot actor
-this['@dna/wall'] = function() {
+this['@dna/wall'] = function(_, dat) {
 
     if (!this._serial) this._serial = 1;
     else this._serial++;
@@ -8,6 +8,8 @@ this['@dna/wall'] = function() {
         name: 'dot-' + this._serial,
         // state
         dt: 0,
+        x: dat.x,
+        y: dat.y,
 
         // show the dot
         draw: function(ctx) {

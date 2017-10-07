@@ -25,7 +25,7 @@ this['@dna/camera'] = function() {
 		
 		evo: function(scene, dt) {
 			this._ls.forEach(function(e) {
-				e.evo(scene, dt)
+				if (e.evo) e.evo(scene, dt)
 			})
 		},
 	
@@ -40,7 +40,7 @@ this['@dna/camera'] = function() {
 			ctx.translate(-location.x, -location.y)
 	    
 			this._ls.forEach(function(e) {
-				e.draw(ctx)
+				if (e.draw) e.draw(ctx)
 			})
 	   
 			if(origin) {

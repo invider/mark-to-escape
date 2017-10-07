@@ -23,7 +23,7 @@ return {
         })
         return list.length
     },
-    spawn: function(source, target) {
+    spawn: function(source, target, spawnData) {
         this._.log.debug('spawning ' + source + ' -> ' + target)
 
         let cons = this._.selectOne(source)
@@ -40,7 +40,7 @@ return {
         if (!this._.sys.isFrame(dest)) return false
         if (!this._.sys.isFun(cons)) return false
 
-        let res = cons()
+        let res = cons(this._, spawnData)
         dest.attach(res)
         return res
     }
