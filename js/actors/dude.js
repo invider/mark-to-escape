@@ -21,6 +21,21 @@ this['@dna/dude'] = function(_, dat) {
         evo: function (scene, delta) {
             switch(this.direction){
                 case UP:
+                    this.testMove(0, -1)
+                    break;
+                case DOWN:
+                    this.testMove(0, 1)
+                    break;
+                case LEFT:
+                    this.testMove(0, 0)
+                    break;
+                case RIGHT:
+                    this.testMove(1, 0)
+                    break;
+            }
+
+            switch(this.direction){
+                case UP:
                     this.y -= delta * this.speed;
                     break;
                 case DOWN:
@@ -40,6 +55,29 @@ this['@dna/dude'] = function(_, dat) {
             // draw dot
             ctx.fillStyle="#FFFFFF";
             ctx.fillRect(this.x, this.y, 1, 1);
+        },
+
+        testMove: function(sx, sy) {
+            if (!this._.lib.isFree(this.x + sx, this.y + sy)) {
+                this.inverse()
+            }
+        },
+
+        inverse: function() {
+            switch(this.direction){
+                case UP:
+                    this.direction = DOWN
+                    break;
+                case DOWN:
+                    this.direction = UP
+                    break;
+                case LEFT:
+                    this.direction = RIGHT
+                    break;
+                case RIGHT:
+                    this.direction = LEFT
+                    break;
+            }
         }
     }
 

@@ -27,13 +27,13 @@ return {
         //this._.log.debug('spawning ' + source + ' -> ' + target)
 
         let cons = this._.selectOne(source)
-        if (!cons) throw { src: this._, msg: "can't find the spawn dna: " + source }
+        if (!cons) throw "can't find the spawn dna: " + source
 
         let dest 
         if (this._.sys.isString(target)) {
             dest = this._.select(target)
-            if (dest.length === 0) throw { src: this._, msg: "can't find spawn target: " + target }
-            if (dest.length > 1) throw { src: this._, msg: "ambiguous target for spawn: " + target }
+            if (dest.length === 0) throw "can't find spawn target: " + target
+            if (dest.length > 1) throw "ambiguous target for spawn: " + target
             dest = dest[0]
         } else {
             dest = target
