@@ -14,8 +14,8 @@ this['@dna/dude'] = function(_, dat) {
         // show the dot
         draw: function(ctx) {
             // draw dot
-            ctx.fillStyle="#0000FF";
-            ctx.fillRect(this.x, this.y, 3, 3);
+            ctx.fillStyle="#FFFFFF";
+            ctx.fillRect(this.x, this.y, 1, 1);
         }
     }
 

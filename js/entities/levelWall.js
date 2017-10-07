@@ -20,7 +20,7 @@ this['@dna/levelWall'] = function(_, dat) {
         draw: function(ctx) {
             // draw dot
             ctx.fillStyle="#0000FF";
-            ctx.fillRect(this.x, this.y, 3, 3);
+            ctx.fillRect(this.x, this.y, 1, 1);
         }
     }
 

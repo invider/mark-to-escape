@@ -243,7 +243,7 @@ var Mod = function(initObj) {
     this.attach(new Frame({
         name: 'lab',
         onAttached: function(node) {
-            this._.log.debug('spawned ' + node.name)
+            //this._.log.debug('spawned ' + node.name)
             node.alive = true
             if (!isFun(node.draw)) node.draw = false
             if (!isFun(node.evo)) node.evo = false
@@ -266,18 +266,26 @@ Mod.prototype.onAttached = function(node) {
 }
 
 Mod.prototype.evolve = function(delta) {
-    _scene.lab._ls.map( function(e) {
-        if (e.evo && !e.dead && !e.paused) e.evo(_scene, delta)
-    });
+    try {
+        this.lab._ls.map( function(e) {
+            if (e.evo && !e.dead && !e.paused) e.evo(_scene, delta)
+        });
+    } catch (e) {
+        this.log.err(e.msg)
+    }
 }
 
 Mod.prototype.draw = function(ctx, delta) {
-    // draw actors
-    for (var i = 0; i < _scene.lab._ls.length; i++) {
-        let e = _scene.lab._ls[i]
-        if (e.draw && !e.dead && !e.hidden) {
-            e.draw(ctx)
+    try {
+        // draw actors
+        for (var i = 0; i < this.lab._ls.length; i++) {
+            let e = this.lab._ls[i]
+            if (e.draw && !e.dead && !e.hidden) {
+                e.draw(ctx)
+            }
         }
+    } catch (e) {
+        this.log.err(e.msg)
     }
 }
 
@@ -673,16 +681,20 @@ function cycle() {
     // loading/setup actions
     // TODO make loading screen mod possible
     if (!_scene.env.started) {
-        if (_scene.res._resIncluded > _scene.res._resLoaded) {
-            // wait more
-        }  else {
-            // OK - everything is loaded, call setup functions
-            _scene.setup._ls.forEach(function(f) {
-                f(_scene)
-            })
-            _scene.env.started = true
+        try {
+            if (_scene.res._resIncluded > _scene.res._resLoaded) {
+                // wait more
+            }  else {
+                // OK - everything is loaded, call setup functions
+                _scene.setup._ls.forEach(function(f) {
+                    f(_scene)
+                })
+                _scene.env.started = true
+            }
+            window.requestAnimFrame(cycle)
+        } catch (e) {
+            _scene.log.err(e.msg)
         }
-        window.requestAnimFrame(cycle)
         return
     }
 

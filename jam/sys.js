@@ -24,15 +24,17 @@ return {
         return list.length
     },
     spawn: function(source, target, spawnData) {
-        this._.log.debug('spawning ' + source + ' -> ' + target)
+        //this._.log.debug('spawning ' + source + ' -> ' + target)
 
         let cons = this._.selectOne(source)
-        if (!cons) return false
+        if (!cons) throw { src: this._, msg: "can't find the spawn dna: " + source }
 
         let dest 
         if (this._.sys.isString(target)) {
-            dest = this._.selectOne(target)
-            if (!dest) return false // can't copy if no node or more than one found
+            dest = this._.select(target)
+            if (dest.length === 0) throw { src: this._, msg: "can't find spawn target: " + target }
+            if (dest.length > 1) throw { src: this._, msg: "ambiguous target for spawn: " + target }
+            dest = dest[0]
         } else {
             dest = target
         }
