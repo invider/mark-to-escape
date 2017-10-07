@@ -5,6 +5,7 @@
     const SETTINGS_DELIMITER = "\n";
     const LEVEL_SETTINGS_DELIMITER = "^^^SETTINGS^^^";
     const LEVEL_MACROS_DELIMITER = "^^^MACROS^^^";
+    const PARAMETRIC_RE = /[a-zA-Z]([0-9]+)/;
     var parseSection = function(lvl, type){
         var cchunks = lvl.split(type);
         if (cchunks.length == 1){
@@ -105,7 +106,13 @@
         parsed.forEach(function(row){
             var x = 0;
             row.forEach(function(symbol){
-                cb(x, y, symbol, params);
+                let param = undefined;
+                let parametricRes = PARAMETRIC_RE.exec(symbol)
+                if (parametricRes){
+                    param = parametricRes[1];
+                    symbol = symbol[0];
+                }
+                cb(x, y, symbol, params, param);
                 x++;
             });
             y++;
