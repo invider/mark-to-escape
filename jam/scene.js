@@ -112,13 +112,30 @@ Frame.prototype.detach = function(node) {
 	
 }
 Frame.prototype.apply = function(fn, predicate) {
+    let i = 0
     if (isFun(predicate)) {
 		this._ls.forEach( function(e) {
-			if (predicate(e)) fn(e)
+			if (predicate(e)) {
+                fn(e)
+                i++
+            }
 		})
+    } else if (isString(predicate)) {
+        let ls = this.select(predicate)
+        ls.forEach( function(e) {
+            fn(e)
+            i++
+        })
     } else {
-		fn(e)
+		this._ls.forEach( function(e) {
+            fn(e)
+            i++
+        })
     }
+    return i
+}
+Frame.prototype.collide = function(fn, predicate) {
+
 }
 Frame.prototype.map = function(fn) {
 }
