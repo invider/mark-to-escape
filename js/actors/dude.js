@@ -28,7 +28,7 @@ this['@dna/dude'] = function(_, dat) {
         animSpeed: 0.2,
 
         spawn: function() {
-            this.img = this._.res.player
+            this.img = this._.res.dude
             this._.lib.sfx('spawned', 0.5)
         },
 
