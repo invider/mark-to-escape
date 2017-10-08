@@ -54,7 +54,8 @@ this['@lib/spawnNextLevel'] = function(){
         constants.path.RIGHT_MARKERS_COUNT,
         constants.path.LEFT_MARKERS_COUNT,
         constants.path.DUDES_SPAWNED_COUNT,
-        constants.path.SPEED_UP_MARKERS_COUNT
+        constants.path.SPEED_UP_MARKERS_COUNT,
+        constants.path.REMOVE_MARKERS_COUNT
     ], 0);
     //
     //  clean /camera/tiles and camera/dudes
