@@ -1,7 +1,7 @@
 
 this['@dna/player'] = function(_, dat) {
 
-	var cell = _.lib.cell(Math.floor(dat.x), Math.floor(dat.y))
+	var cell = _.lib.cell(dat.x, dat.y)
     
     var lastKey = (function(key) {
     	var keys = [

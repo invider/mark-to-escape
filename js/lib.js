@@ -50,10 +50,14 @@ _patch$gamelib = {
         ).concat(this._.lab.camera.dudes._ls)
         return lists.filter(e => e.alive && Math.floor(e.x) === x && Math.floor(e.y) === y );
     },
+    
     getMarksAt: function(x, y){
         return this.getObjectsAt(x, y).filter(o => o.type === constants.types.MARK);
     },
+    
     cell: function(cx, cy) {
+    	cx = Math.floor(cx)
+    	cy = Math.floor(cy)
     	return {
     		enter: function(x, y, dir) {
     			var cx2 = dir.r(x)
