@@ -76,17 +76,12 @@ this['@dna/player'] = function(_, dat) {
         },
 
         evo: function(scene, dt) {
-        	var velocity = 4 * dt
-
-        	var d = this.direction
-            this.x += velocity * d.dx
-            this.y += velocity * d.dy
+        	var velocity = 4
+            this.x += velocity * dt * this.direction.dx
+            this.y += velocity * dt * this.direction.dy
             
             lastKey.remember()
-        	if(cell.enter(this.x, this.y, d)) {
-        		this.x = cell.getX();
-        		this.y = cell.getY();
-
+        	if(cell.enter(this)) {
                 this.chooseDirection()
                 this.fixDirection()
                 this.spawnMarks()

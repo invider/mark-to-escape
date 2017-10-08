@@ -61,12 +61,14 @@ _patch$gamelib = {
     	cx = Math.floor(cx)
     	cy = Math.floor(cy)
     	return {
-    		enter: function(x, y, dir) {
-    			var cx2 = dir.r(x)
-    			var cy2 = dir.r(y)
-    			var dx = Math.abs(x - cx2)
-    			var dy = Math.abs(y - cy2)
+    		enter: function(p) {
+    			var cx2 = p.direction.r(p.x)
+    			var cy2 = p.direction.r(p.y)
+    			var dx = Math.abs(p.x - cx2)
+    			var dy = Math.abs(p.y - cy2)
     			if(cx != cx2 && dx < 0.5 || cy != cy2 && dy < 0.5) {
+    				p.x = cx2
+    				p.y = cy2
     				cx = cx2
     				cy = cy2
     				return true;
