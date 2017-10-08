@@ -15,6 +15,7 @@
                 targetSpeed: 10,
                 stepOver: function(target) {
                 	target.speed = this.targetSpeed;
+                    this._.lib.sfx('speedUp', 0.5)
                 },
 
                 // evolve
