@@ -8,7 +8,7 @@ this['@dna/player'] = function(_, dat) {
 		left: { dx: -1, dy: 0, r: Math.ceil },
 		right: { dx: 1, dy: 0, r: Math.floor }
 	}
-	
+
 	var cell = (function(cx, cy) {
     	return {
     		enter: function(x, y, r) {
@@ -31,7 +31,7 @@ this['@dna/player'] = function(_, dat) {
             },
     	}
     })(Math.floor(dat.x), Math.floor(dat.y))
-    
+
     var nextDirection = (function(d) {
     	return {
     		select: function() {
@@ -53,7 +53,7 @@ this['@dna/player'] = function(_, dat) {
     		}
     	}
     })(dir.none)
-	
+
     // generate unique id
     if (!this._serial) this._serial = 1;
     else this._serial++;
@@ -75,24 +75,24 @@ this['@dna/player'] = function(_, dat) {
         hit: function(e) {
             //console.log('hit by ' + e.name)
         },
-        
+
         chooseDirection: function() {
         	this.direction = nextDirection.value()
         },
 
         evo: function(scene, dt) {
         	var velocity = 4 * dt
-        	
+
         	var d = this.direction
             this.x += velocity * d.dx
             this.y += velocity * d.dy
-            this.spawnMarks(k);
+            this.spawnMarks();
             nextDirection.select()
         	if(cell.enter(this.x, this.y, d.r)) {
                 // hit a new cell - check if marker is there
         		this.x = cell.getX();
         		this.y = cell.getY();
-        		
+
                 // hit a new cell - check if marker is there
                 let markers = this._.lib.getObjectsAt(cell.getX(), cell.getY()).filter( function(e) {
                     return (e.type === 'mark')
@@ -101,13 +101,28 @@ this['@dna/player'] = function(_, dat) {
                     console.log('found markers')
                     markers[0].hit(this)
                 }
-                
+
                 this.chooseDirection()
         	} else if(d.none) {
         		this.chooseDirection()
         	}
         },
-        
+        spawnMarks:function(){
+            let k = scene.env.keys;
+            let marks = this._.lib.getMarksAt(this.x, this.y);
+            if (!marks.length){
+                if (k[constants.keyCodes.SPAWN_MARK_LEFT]){
+                    this.spawnMark(this.x, this.y, constants.objects.leftMark);
+                }
+            }
+        },
+        spawnMark: function(x, y, type){
+            console.log("spawning mark:" + type);
+            this._.sys.spawn('dna/' + type, 'lab/camera', {
+                x: x,
+                y: y,
+            });
+        },
         // show the dot
         draw: function(ctx) {
         	var x = this.x
