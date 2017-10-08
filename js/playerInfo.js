@@ -24,6 +24,8 @@ this['@dna/playerInfo'] = function() {
             txt += this.addVar({caption: "LM:", path: "env/player/markers/left", number: 1});
             txt += this.addVar({caption: "DM:", path: "env/player/markers/down", number: 1});
             txt += this.addVar({caption: "UM:", path: "env/player/markers/up", number: 1});
+            txt += this.addVar({caption: "Alive:", path: "env/player/dudesSpawned", number: 1});
+
 
 			// "env/player/markers/right=3\n"+
             // "env/player/markers/down=2\n"+

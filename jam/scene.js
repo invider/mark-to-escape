@@ -234,6 +234,17 @@ Frame.prototype.selectOne = function(predicate) {
 	let list = this.select(predicate)
 	if (list.length > 0) return list[0]
 	return false
+};
+
+Frame.prototype.selectOneNumber = function(predicate) {
+    let list = this.select(predicate)
+    if (list.length > 0) {
+        if (isNaN(list[0])){
+            throw new Error("Error parsing number:" + list[0])
+        }
+        return parseFloat(list[0]);
+    }
+    return 0;
 }
 
 Frame.prototype.kill = function() {
@@ -447,12 +458,18 @@ _scene.patch = function(target, path, node) {
     }
 
     // found the patch point - attach the node
+    if (node === 2){
+        debugger;
+    }
     if (isFrame(target)) {
         if (path === '') {
             target.attach(node)
         } else {
-            if (target[path]) {
+            if (isObj(target[path])) {
                 augment(target[path], node)
+            } else if (target[path] !== undefined) {
+                // TODO doesn't work property for frames - _dir and _ls stays the same
+                target[path] = node
             } else {
                 target.attach(node, path)
             }
@@ -461,11 +478,10 @@ _scene.patch = function(target, path, node) {
         target.push(node)
     } else if (isObj(target)) {
         if (path === '') throw { src: this, msg: "can't attach anonymous node to " + target }
-        if (target[path]) {
-            //console.log('augmenting: ' + path)
+        if (isObj(target[path])) {
             augment(target[path], node)
-        } else {
-            //console.log('rewriting: ' + path)
+        } else if (target[path] !== undefined) {
+            // TODO doesn't work property for frames - _dir and _ls stays the same
             target[path] = node
         }
     }
