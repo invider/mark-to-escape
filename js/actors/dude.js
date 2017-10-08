@@ -20,7 +20,14 @@ this['@dna/dude'] = function(_, dat) {
         defaultSpeed: 1,
         direction: dat.direction,
 
+        animFrame: 0,
+        animState: 0,
+        animStart: 0,
+        animEnd: 6,
+        animSpeed: 0.2,
+
         spawn: function() {
+            this.img = this._.res.player
             this._.lib.sfx('spawned', 0.5)
         },
 
@@ -31,7 +38,21 @@ this['@dna/dude'] = function(_, dat) {
         hit: function(e) {
         },
 
+        anim: function(delta) {
+            // adjust anim speed
+            (this.speed >= 8)?  this.animSpeed = 0.03 : this.animSpeed = 0.2
+            //
+            this.animState += delta
+            if (this.animState >= this.animSpeed) {
+                // next frame
+                this.animFrame ++
+                this.animState -= this.animSpeed
+                if (this.animFrame > this.animEnd) this.animFrame = this.animStart
+            }
+        },
+
         evo: function (scene, delta) {
+            this.anim(delta)
         	this.x += delta * this.speed * this.direction.dx
         	this.y += delta * this.speed * this.direction.dy
         	
@@ -59,7 +80,7 @@ this['@dna/dude'] = function(_, dat) {
                 case constants.dir.DOWN: ctx.rotate(Math.PI); break;
             }
 
-            ctx.drawImage(this._.res.player, -hw, -hh, 1, 1);
+            ctx.drawImage(this.img[this.animFrame], -hw, -hh, 1, 1);
             ctx.restore()
         },
         checkToKill:function(){
