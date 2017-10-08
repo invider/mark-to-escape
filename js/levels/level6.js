@@ -5,7 +5,7 @@
     "env/player/markers/left=1\n"+
     "env/player/markers/speedUp=2\n" +
     "env/player/goal=30\n"+
-    "env/player/levelName=Psycho\n"+
+    "env/player/levelName=Break the wall!!!\n"+
     "^^^SETTINGS^^^"+
     "^^^MACROS^^^" +
      "*****************************************************\n" +
