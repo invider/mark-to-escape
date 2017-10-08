@@ -7,7 +7,7 @@
 
         let dumpTime = 0
         return {
-            type: 'mark',
+            type: constants.types.MARK,
             name: 'mark-' + this._serial,
 
             // state

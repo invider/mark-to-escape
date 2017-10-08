@@ -56,15 +56,19 @@ this['@dna/player'] = function(_, dat) {
         evo: function(scene, dt) {
         	var velocity = 1.5 * dt
         	var d = this.direction
-
             var k = scene.env.keys
+            for (var k in k){
+                console.log(k);
+                break;
+            }
+
             if (k[37] || k[38] || k[39] || k[40]) {
                 this._x = this.x
                 this.x += velocity * d.dx
                 this._y = this.y
                 this.y += velocity * d.dy
             }
-
+            this.spawnMarks(k);
         	if(cell.enter(this.x, this.y, d.r)) {
                 // hit a new cell - check if marker is there
         		this.x = cell.getX();
@@ -88,7 +92,21 @@ this['@dna/player'] = function(_, dat) {
         		}
         	}
         },
-        
+        spawnMarks:function(k){
+            var marks = this._.lib.getMarksAt(this.x, this.y);
+            if (!marks.length){
+                if (k[constants.keyCodes.SPAWN_MARK_LEFT]){
+                    this.spawnMark(this.x, this.y, constants.objects.leftMark);
+                }
+            }
+        },
+        spawnMark: function(x, y, type){
+            console.log("spawning mark:" + type);
+            this._.sys.spawn('dna/' + type, 'lab/camera', {
+                x: x,
+                y: y,
+            });
+        },
         // show the dot
         draw: function(ctx) {
         	var x = this.x
