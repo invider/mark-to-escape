@@ -1,9 +1,5 @@
 // dot actor
 (function() {
-    const UP = 'UP';
-    const DOWN = 'DOWN';
-    const LEFT = 'LEFT';
-    const RIGHT = 'RIGHT';
     this['@dna/mark'] = function (_, dat) {
 
         if (!this._serial) this._serial = 1;
@@ -47,8 +43,8 @@
     this['@dna/downMark'] = this['@dna/mark'];
     this['@dna/rightMark'] = this['@dna/mark'];
 
-    this['@dna/upMark'].direction = UP;
-    this['@dna/downMark'].direction = DOWN;
-    this['@dna/leftMark'].direction = LEFT;
-    this['@dna/rightMark'].direction = RIGHT;
+    this['@dna/upMark'].direction = constants.dir.UP;
+    this['@dna/downMark'].direction = constants.dir.DOWN;
+    this['@dna/leftMark'].direction = constants.dir.LEFT;
+    this['@dna/rightMark'].direction = constants.dir.RIGHT;
 })();
