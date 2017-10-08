@@ -27,7 +27,10 @@ _patch$gamelib = {
 
         x = Math.floor(x);
         y = Math.floor(y);
-        return this._.lab.camera._ls.filter(e => e.alive && Math.floor(e.x) === x && Math.floor(e.y) === y );
+        let lists = this._.lab.camera._ls.concat(
+            this._.lab.camera.tiles._ls
+        ).concat(this._.lab.camera.dudes._ls)
+        return lists.filter(e => e.alive && Math.floor(e.x) === x && Math.floor(e.y) === y );
     },
     getMarksAt: function(x, y){
         return this.getObjectsAt(x, y).filter(o => o.type === constants.types.MARK);
