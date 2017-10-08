@@ -50,11 +50,9 @@ this['@dna/dude'] = function(_, dat) {
             }
         },
 
-        // show the dot
         draw: function(ctx) {
-            // draw dot
-            ctx.fillStyle="#FFFFFF";
-            ctx.fillRect(this.x, this.y, 1, 1);
+            ctx.imageSmoothingEnabled = false
+            ctx.drawImage(this._.res.player, this.x, this.y, 1, 1);
         },
 
         testMove: function(sx, sy) {

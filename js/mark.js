@@ -18,7 +18,7 @@ _setup$game = function(_) {
 this['@lab/background'] = {
     draw: function(ctx) {
         // clear the screen
-        ctx.fillStyle = "#220044"
+        ctx.fillStyle = "#D0B0A0"
         ctx.fillRect(0, 0, canvas.width, canvas.height)
     }
 };

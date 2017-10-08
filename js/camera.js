@@ -17,6 +17,10 @@ this['@dna/camera'] = function() {
 			location = target || { x:0, y:0 };
 			return this;
 		},
+
+		getTarget: function() {
+			return location
+		},
 		
 		showOrigin: function() {
 			origin = true;

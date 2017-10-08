@@ -103,10 +103,10 @@ Frame.prototype.attach = function(node, name) {
     }
     this._ls.push(node)
     if (isFun(node.init)) node.init() // initialize node
-    this.onAttached(node)
+    this.onAttached(node, name, this)
 }
-Frame.prototype.onAttached = function(node) {
-    this.__.onAttached(node)
+Frame.prototype.onAttached = function(node, name, parent) {
+    this.__.onAttached(node, name, parent)
 }
 Frame.prototype.detach = function(node) {
 	
@@ -135,7 +135,6 @@ Frame.prototype.apply = function(fn, predicate) {
     return i
 }
 Frame.prototype.collide = function(fn, predicate) {
-
 }
 Frame.prototype.map = function(fn) {
 }
@@ -248,6 +247,26 @@ var Mod = function(initObj) {
     Frame.call(this, initObj)
     this._$ = _scene
 
+    // resources container
+    this.attach(new Frame({
+        name: 'res',
+        _resIncluded: 0,
+        _resLoaded: 0,
+        onAttached: function(node, name, parent) {
+            if (isString(node)) {
+                if (name) {
+                    // the name for the node is specified, so put under that one
+                    let rs = this._.load(node)
+                    parent.attach(rs, name)
+                } else {
+                    // no name for the node, load to filename
+                    this._.load(node, parent)
+                }
+            } else {
+                this._.log.err("wrong type for resource node: " + name? name : node)
+            }
+        }
+    }))
     // library functions
     this.attach(new Frame({
         name: "lib",
@@ -278,8 +297,8 @@ Mod.prototype.init = function() {
     this.attach(new Frame(this.___.log)) // clone log from the parent mod
 }
 
-Mod.prototype.onAttached = function(node) {
-    if (this.__) this.__.onAttached(node)
+Mod.prototype.onAttached = function(node, name, parent) {
+    if (this.__) this.__.onAttached(node, name, parent)
 }
 
 Mod.prototype.evolve = function(delta) {
@@ -297,7 +316,61 @@ Mod.prototype.draw = function(ctx, delta) {
         }
     }
 }
+Mod.prototype.load = function(src, target, ext) {
+    var _ = this
 
+    function onLoad() {
+        _.res._resLoaded++
+    }
+    function onLoadScript(e) {
+        _.res._resLoaded++
+        //_.log.debug('scanning: ' + src + ' loaded: ' + _.res._resLoaded + '/' + _.res._resIncluded)
+        _.scan()
+    }
+
+    // normalize extention
+    if (!ext) ext = src.slice((Math.max(0, src.lastIndexOf(".")) || Infinity) + 1).toLowerCase();
+
+    if (name === undefined) {
+        name = src.replace(/^.*[\\\/]/, '')  // remove path
+        name = name.replace(/\.[^/.]+$/, '') // remove extension
+    }
+
+    if (ext === 'png' || ext === 'jpeg' || ext === 'jpg') {
+        this.log.out('loading image [' + name + ']: ' + src)
+        this.res._resIncluded ++
+        var img = new Image()
+        img.src = src
+        img.onload = onLoad
+        if (isFrame(target)) target.attach(img, name)
+        else if (isObj(target)) target[name] = img
+        return img
+
+    } else if (ext === 'ttf') {
+
+    } else if (ext === 'wav') {
+
+    } else if (ext === 'ogg') {
+
+    } else if (ext === 'json') {
+        // TODO how to load that? only AJAX?
+    } else if (ext === 'yaml') {
+        // TODO how to load that? only AJAX?
+    } else if (ext === 'txt') {
+        // TODO how to load that? only AJAX?
+    } else if (ext === 'csv') {
+        // TODO how to load that? only AJAX?
+    } else if (ext === 'js') {
+        src += "?" + Math.random() // fix cache issue
+        this.log.debug('loading script: ' + src)
+        this.res._resIncluded ++
+        var script = document.createElement('script');
+        script.onload = onLoadScript
+        script.src = src
+        document.head.appendChild(script);
+        return script
+    }
+}
 
 
 // ***********************
@@ -326,15 +399,6 @@ _scene.attach(new Frame({
     dump: function(obj) {
         console.dir(obj)
     },
-}))
-
-// *********
-// resources
-//
-_scene.attach(new Frame({
-    name: 'res',
-    _resIncluded: 0,
-    _resLoaded: 0,
 }))
 
 _scene.attach(new Frame({
@@ -461,7 +525,7 @@ _scene.scan = function(target) {
                         let fullPath = path + pkey
                         let val = node[pkey]
                         if (val) {
-                            _scene.log.debug('~~ ' + fullPath + ' << ' + (val._info? val._info : val))
+                            _scene.log.debug('~~ ' + fullPath + ' << ' + (val._info? val._info : (val.name? val.name : '')))
                             _scene.patch(_scene, fullPath, val)
                         }
                     }
@@ -473,13 +537,13 @@ _scene.scan = function(target) {
             let node = target[key]
             if (node) {
                 let path = key.substring(key.indexOf('@') + 1)
-                _scene.log.debug('~~ ' + path + ' << ' + (node._info? node._info : node))
+                _scene.log.debug('~~ ' + path + ' << ' + (node._info? node._info : (node.name? node.name : '')))
                 _scene.patch(_scene, path, target[key])
                 target[key] = false
             }
         } else if (key.startsWith('_$') && node && isString(node._$patchAt)) {
             let path = node._$patchAt
-            _scene.log.debug('~~ ' + path + ' << ' + (val._info? val._info : val))
+            _scene.log.debug('~~ ' + path + ' << ' + (val._info? val._info : (val.name? val.name : '')))
             _scene.patch(_scene, fullPath, val)
         }
         /*
@@ -511,61 +575,6 @@ _scene.scan = function(target) {
             target[key] = "loaded"
         }
         */
-    }
-}
-
-_scene.load = function(src, target, ext) {
-    function onLoad() {
-        _scene.res._resLoaded++
-    }
-    function onLoadScript(e) {
-        _scene.res._resLoaded++
-        _scene.log.debug('scanning: ' + src)
-        _scene.scan()
-    }
-
-    // normalize target
-    if (!isObj(target)) {
-        target = _scene.res
-    }
-
-    // normalize extention
-    if (!ext) ext = src.slice((Math.max(0, src.lastIndexOf(".")) || Infinity) + 1).toLowerCase();
-
-    if (name === undefined) {
-        name = src.replace(/^.*[\\\/]/, '')  // remove path
-        name = name.replace(/\.[^/.]+$/, '') // remove extension
-    }
-
-    if (ext === 'png' || ext === 'jpeg' || ext === 'jpg') {
-        _scene.log.out('loading image [' + name + ']: ' + src)
-        scene.res._resIncluded ++
-        var img = new Image()
-        img.src = src
-        img.onload = onLoad
-        target[name] = img
-    } else if (ext === 'ttf') {
-
-    } else if (ext === 'wav') {
-
-    } else if (ext === 'ogg') {
-
-    } else if (ext === 'json') {
-        // TODO how to load that? only AJAX?
-    } else if (ext === 'yaml') {
-        // TODO how to load that? only AJAX?
-    } else if (ext === 'txt') {
-        // TODO how to load that? only AJAX?
-    } else if (ext === 'csv') {
-        // TODO how to load that? only AJAX?
-    } else if (ext === 'js') {
-        src += "?" + Math.random() // fix cache issue
-        _scene.log.debug('loading script: ' + src)
-        scene.res._resIncluded ++
-        var script = document.createElement('script');
-        script.onload = onLoadScript
-        script.src = src
-        document.head.appendChild(script);
     }
 }
 

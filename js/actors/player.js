@@ -61,6 +61,7 @@ this['@dna/player'] = function(_, dat) {
         	var y = this.y
             var d = this.direction
             
+            /*
             // draw dot
             ctx.fillStyle="#FF1111";
             ctx.fillRect(x, y, 1, 1);
@@ -72,6 +73,9 @@ this['@dna/player'] = function(_, dat) {
             ctx.lineTo(x + (1 + d.dx + d.dy) / 2, y + (1 + d.dy - d.dx) / 2)
             ctx.closePath()
             ctx.fill()
+            */
+            ctx.imageSmoothingEnabled = false
+            ctx.drawImage(this._.res.player, this.x, this.y, 1, 1);
         }
     }
 
