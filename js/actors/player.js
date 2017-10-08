@@ -84,16 +84,16 @@ this['@dna/player'] = function(_, dat) {
         chooseDirection: function() {
         	switch(lastKey.value()) {
         		case constants.keyCodes.UP:
-        			this.direction = dir.up
+        			this.direction = dir.up;
         			break;
         		case constants.keyCodes.DOWN:
-        			this.direction = dir.down
+        			this.direction = dir.down;
         			break;
         		case constants.keyCodes.LEFT:
-        			this.direction = dir.left
+        			this.direction = dir.left;
         			break;
         		case constants.keyCodes.RIGHT:
-        			this.direction = dir.right
+        			this.direction = dir.right;
         			break;
             	default:
             		this.direction = dir.none
