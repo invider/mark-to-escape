@@ -52,7 +52,8 @@ this['@dna/panel'] = function(_) {
 			var y = canvas.height - w - s
 
 			for ( var i in items) {
-				ctx.fillStyle = items[i].selected ? '#ff0000' : '#0000ff'
+				var v = items[i];
+				ctx.fillStyle = v.selected ? '#ff0000' : v.canSelect() ? '#0000ff' : 'grey'
 				ctx.fillRect(x, y, w, w)
 				ctx.drawImage(items[i].img, x + is/2, y + is/2, w - is, w - is);
 				x += w + s
