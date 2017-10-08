@@ -67,6 +67,8 @@ this['@dna/player'] = function(_, dat) {
 
         	if(cell.enter(this.x, this.y, d.r)) {
                 // hit a new cell - check if marker is there
+        		this.x = cell.getX();
+        		this.y = cell.getY();
                 let markers = this._.lib.getObjectsAt(cell.getX(), cell.getY()).filter( function(e) {
                     return (e.type === 'mark')
                 })
