@@ -122,8 +122,8 @@
     };
     this["@lib/parser/parse"] = function(lvl, cb){
         var parsed = parser(lvl, this._.selectOne("lib/parser/globalMacros"), cb);
-        for (var k in parsed){
-            this._.patch(this._, k, parsed[k]);
+        for (var k in parsed.settings){
+            this._.patch(this._, k, parsed.settings[k]);
         }
         return parsed;
     };

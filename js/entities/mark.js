@@ -9,18 +9,22 @@
         if (!this._serial) this._serial = 1;
         else this._serial++;
         return {
-
+            x: dat.x,
+            y: dat.y,
             name: 'mark-' + this._serial,
             // state
             direction: arguments.callee.direction,
             // evolve
             evo: function (scene, delta) {
+                // _.lib.getObjectsAt(this.x, this.y).forEach(function(o){
+                //     console.log(o);
+                //     debugger;
+                // });
             },
 
             // show the dot
             draw: function (ctx) {
-                // draw dot
-                ctx.fillStyle = "#cccccc";
+                ctx.fillStyle = "#444444";
                 ctx.fillRect(this.x, this.y, 1, 1);
             }
         }
