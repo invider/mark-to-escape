@@ -18,7 +18,10 @@
                 h: 1,
 
                 stepOver: function(target) {
-                	target.direction = direction
+                    if (target.markable) {
+                        target.direction = direction
+                        this._.lib.sfx('turned', 0.5)
+                    }
                 },
                 
                 /*

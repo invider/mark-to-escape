@@ -9,7 +9,7 @@ this['@dna/dude'] = function(_, dat) {
     return {
         type: 'dude',
         name: 'dude_' + this._serial,
-        //markable: true,
+        markable: true,
         //collidable: true,
         // state
         x: dat.x,
