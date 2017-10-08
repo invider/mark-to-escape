@@ -85,7 +85,7 @@ this['@dna/player'] = function(_, dat) {
                 this.chooseDirection()
                 this.fixDirection()
                 this.spawnMarks()
-        	} else if(d.none) {
+        	} else if(this.direction.none) {
         		this.chooseDirection()
                 this.fixDirection()
                 this.spawnMarks()
