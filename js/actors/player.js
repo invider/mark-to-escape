@@ -30,13 +30,9 @@ this['@dna/player'] = function(_, dat) {
     	}
     })(0)
 
-    // generate unique id
-    if (!this._serial) this._serial = 1;
-    else this._serial++;
-
     return {
         type: 'player',
-        name: 'player_' + this._serial,
+        name: 'player',
         collidable: true,
         markable: true,
 

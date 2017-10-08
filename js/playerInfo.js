@@ -7,7 +7,7 @@ this['@dna/playerInfo'] = function() {
 
 		},
 		txt: function(ctx, text){
-            ctx.font = '48px serif';
+            ctx.font = '48px zekton, impact, sans-serif';
             ctx.fillStyle="#FF0000";
             ctx.fillText(text, 10, 50);
 		},
