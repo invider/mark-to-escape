@@ -34,5 +34,12 @@ _patch$debug = {
         return '<br>mouse: ' + env.mouseX + 'x' + env.mouseY
     },
 
+    status: function(_) {
+        let env = _.env
+        if (env.status) {
+            return '<br>' + env.status
+        }
+    },
+
 }
 

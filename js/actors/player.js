@@ -98,6 +98,11 @@ this['@dna/player'] = function(_, dat) {
             	default:
             		this.direction = dir.none
         	}
+            if (!this._.lib.isFree(
+                        cell.getX() + this.direction.dx,
+                        cell.getY() + this.direction.dy)) {
+                    this.direction = dir.none
+            }
         },
 
         evo: function(scene, dt) {
