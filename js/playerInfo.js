@@ -12,7 +12,7 @@ this['@dna/playerInfo'] = function() {
             ctx.fillText(text, 10, 50);
 		},
 		addVar: function(opts){
-			let v = this._.selectOne(opts.path);
+			let v = opts.value === undefined ? this._.selectOne(opts.path): opts.value;
 			if (opts.number) {
 				v = v || 0;
 			}
@@ -25,6 +25,8 @@ this['@dna/playerInfo'] = function() {
             txt += this.addVar({caption: "DM:", path: "env/player/markers/down", number: 1});
             txt += this.addVar({caption: "UM:", path: "env/player/markers/up", number: 1});
             txt += this.addVar({caption: "Alive:", path: "env/player/dudesSpawned", number: 1});
+            txt += this.addVar({caption: "Goal:", value: this._.selectOneNumber("env/player/dudesEscaped") + "/" + this._.selectOneNumber("env/player/goal"), number: 1});
+
 
 
 			// "env/player/markers/right=3\n"+

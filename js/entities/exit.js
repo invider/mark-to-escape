@@ -14,7 +14,7 @@ this['@dna/exit'] = function(_, dat) {
         // show the dot
         draw: function(ctx) {
             // draw dot
-            ctx.fillStyle="#a0a0a0";
+            ctx.fillStyle = "#a0a0a0";
             ctx.fillRect(this.x, this.y, 1, 1);
         }
     }
