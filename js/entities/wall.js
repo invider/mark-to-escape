@@ -5,12 +5,14 @@ this['@dna/wall'] = function(_, dat) {
     else this._serial++;
 
     return {
-        name: 'dot-' + this._serial,
+        name: 'wall-' + this._serial,
         solid: true,
         // state
         dt: 0,
         x: dat.x,
         y: dat.y,
+        h: 1,
+        w: 1,
 
         // show the dot
         draw: function(ctx) {

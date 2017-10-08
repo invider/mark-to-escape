@@ -12,11 +12,17 @@ this['@dna/dude'] = function(_, dat) {
 
     return {
         name: 'dude_' + this._serial,
+        collidable: true,
         // state
         x: dat.x,
         y: dat.y,
+        w: 1,
+        h: 1,
         speed: 1,
         direction: dat.direction,
+
+        hit: function(e) {
+        },
 
         evo: function (scene, delta) {
             switch(this.direction){

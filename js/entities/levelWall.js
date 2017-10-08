@@ -5,12 +5,14 @@ this['@dna/levelWall'] = function(_, dat) {
     else this._serial++;
 
     return {
-        name: 'dot-' + this._serial,
+        name: 'edge-' + this._serial,
         solid: true,
         // state
         dt: 0,
         x: dat.x,
         y: dat.y,
+        w: 1,
+        h: 1,
 
         // evolve
         evo: function(scene, delta) {
