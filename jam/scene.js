@@ -325,8 +325,22 @@ var Mod = function(initObj) {
                     // no name for the node, load to filename
                     this._.load(node, parent)
                 }
+            
+            } else if (isArray(node)) {
+                // load resource group
+                let _ = this._
+                let rgroup = []
+                // load
+                node.forEach( function(e) {
+                    rgroup.push(_.load(e))
+                })
+                // push
+                node.splice(0)
+                rgroup.forEach( function(e) {
+                    node.push(e)
+                })
             } else {
-                this._.log.err("wrong type for resource node: " + name? name : node)
+                // just ignore - that probably already loaded resource node
             }
         }
     }))
@@ -933,7 +947,6 @@ window.requestAnimFrame = (function() {
             window.setTimeout(callback, 1000/60);
          };
 })();
-
 
 return _scene;
 

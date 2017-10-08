@@ -2,7 +2,16 @@
 _patch$gameResources = {
     _$patchAt: 'res',
 
-    player: 'img/dude_t1.png',
+    player: [
+        'img/dude_t1.png',
+        'img/dude_t2.png',
+        'img/dude_t3.png',
+        'img/dude_t2.png',
+        'img/dude_t1.png',
+        'img/dude_t4.png',
+        'img/dude_t5.png',
+        'img/dude_t4.png',
+    ],
     dude: 'img/dude_t1.png',
     exit: 'img/exit.png',
     left_mark: 'img/left_mark.png',
@@ -16,7 +25,7 @@ _patch$gameResources = {
 
 _patch$sfxResources = {
     _$patchAt: 'res/sfx',
-
+    speedUp: 'sfx/jump-1.wav',
     spawned: 'sfx/jump-1.wav',
     killed: 'sfx/jump-3.wav',
     turned: 'sfx/pickup-2.wav',
