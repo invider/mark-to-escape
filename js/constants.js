@@ -28,5 +28,8 @@ const constants = {
     },
     objects:{
         leftMark: "dna/leftMark"
+    },
+    layers:{
+        TILES:"lab/camera/tiles"
     }
 };

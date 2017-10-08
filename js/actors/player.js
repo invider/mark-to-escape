@@ -139,7 +139,7 @@ this['@dna/player'] = function(_, dat) {
         },
         spawnMark: function(x, y, type){
             console.log("spawning mark:" + type);
-            this._.sys.spawn('dna/' + type, 'lab/camera', {
+            this._.sys.spawn(type, constants.layers.TILES, {
                 x: x,
                 y: y,
             });

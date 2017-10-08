@@ -32,8 +32,27 @@
 
             // show the dot
             draw: function (ctx) {
-                ctx.fillStyle = "#444444";
-                ctx.fillRect(this.x, this.y, 1, 1);
+                // ctx.fillStyle = "#444444";
+                // ctx.fillRect(this.x, this.y, 1, 1);
+                let res = "";
+                switch (this.direction){
+                    case constants.dir.UP:
+                        res = this._.res.up_mark;
+                        break;
+                    case constants.dir.DOWN:
+                        res = this._.res.down_mark;
+                        break;
+                    case constants.dir.LEFT:
+                        res = this._.res.left_mark;
+                        break;
+                    case constants.dir.RIGHT:
+                        res = this._.res.right_mark;
+                        break;
+                    default:
+                        throw new Error("Unknown direction:" + this.direction);
+                }
+                ctx.imageSmoothingEnabled = false
+                ctx.drawImage(res, this.x, this.y, 1, 1);
             }
         }
 
