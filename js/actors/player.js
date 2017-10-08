@@ -104,8 +104,10 @@ this['@dna/player'] = function(_, dat) {
             }
 
             if (toSpawn){
-                if (this._.lib.selectUtils.checkAndDec(toCheck)){
-                    this.spawnMark(this.x, this.y, toSpawn);
+                if (this._.selectOneNumber(toCheck)){
+                    if (this.spawnMark(this.x, this.y, toSpawn)){
+                        this._.lib.selectUtils.dec(toCheck);
+                    }
                 }
             }
         },
@@ -118,7 +120,9 @@ this['@dna/player'] = function(_, dat) {
                     x: x,
                     y: y,
                 });
+                return true;
             }
+            return false;
         },
         
         draw: function(ctx) {
