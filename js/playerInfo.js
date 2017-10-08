@@ -20,13 +20,13 @@ this['@dna/playerInfo'] = function() {
 		},
 		draw: function(ctx) {
 			let txt = "";
-            txt += this.addVar({caption: "RM:", path: "env/player/markers/right", number: 1});
-            txt += this.addVar({caption: "LM:", path: "env/player/markers/left", number: 1});
-            txt += this.addVar({caption: "DM:", path: "env/player/markers/down", number: 1});
-            txt += this.addVar({caption: "UM:", path: "env/player/markers/up", number: 1});
-            txt += this.addVar({caption: "Alive:", path: "env/player/dudesSpawned", number: 1});
+            txt += this.addVar({caption: "RM:", path: constants.path.RIGHT_MARKERS_COUNT, number: 1});
+            txt += this.addVar({caption: "LM:", path: constants.path.LEFT_MARKERS_COUNT, number: 1});
+            txt += this.addVar({caption: "DM:", path: constants.path.DOWN_MARKERS_COUNT, number: 1});
+            txt += this.addVar({caption: "UM:", path: constants.path.UP_MARKERS_COUNT, number: 1});
+            txt += this.addVar({caption: "Alive:", path: constants.path.DUDES_SPAWNED_COUNT, number: 1});
             txt += this.addVar({caption: "Goal:", value: this._.selectOneNumber("env/player/dudesEscaped") + "/" + this._.selectOneNumber("env/player/goal"), number: 1});
-            txt += this.addVar({caption: "LVL:", path: "env/player/currentLevel", number: 1});
+            txt += this.addVar({caption: "LVL:", path: constants.path.PLAYER_LEVEL, number: 1});
 
 
 

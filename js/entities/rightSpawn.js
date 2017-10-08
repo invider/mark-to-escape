@@ -45,8 +45,8 @@
                         break;
                 }
                 let spawned = this._.sys.spawn('dna/dude', 'lab/camera', pos);
-                let alreadySpawned = this._.selectOneNumber("env/player/dudesSpawned");
-                this._.patch(this._, "env/player/dudesSpawned", alreadySpawned + 1);
+                let alreadySpawned = this._.selectOneNumber(constants.path.DUDES_SPAWNED_COUNT);
+                this._.patch(this._, constants.path.DUDES_SPAWNED_COUNT, alreadySpawned + 1);
             },
             // show the dot
             draw: function (ctx) {
