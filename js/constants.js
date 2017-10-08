@@ -27,7 +27,10 @@ const constants = {
         MARK: "mark"
     },
     objects:{
-        leftMark: "dna/leftMark"
+        leftMark: "dna/leftMark",
+        rightMark: "dna/rightMark",
+        upMark: "dna/upMark",
+        downMark: "dna/downMark"
     },
     layers:{
         TILES:"lab/camera/tiles"

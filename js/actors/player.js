@@ -139,7 +139,14 @@ this['@dna/player'] = function(_, dat) {
             if (!marks.length){
                 if (lastKey.value() == constants.keyCodes.SPAWN_MARK_LEFT){
                     this.spawnMark(this.x, this.y, constants.objects.leftMark);
+                } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_RIGHT){
+                    this.spawnMark(this.x, this.y, constants.objects.rightMark);
+                } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_UP){
+                    this.spawnMark(this.x, this.y, constants.objects.leftMark);
+                } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_DOWN){
+                    this.spawnMark(this.x, this.y, constants.objects.downMark);
                 }
+
             }
         },
         spawnMark: function(x, y, type){
