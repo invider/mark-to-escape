@@ -5,15 +5,7 @@ this['@dna/player'] = function(_, dat) {
     
     var lastKey = (function(key) {
     	var keys = [
-<<<<<<< HEAD
     		constants.keyCodes.SPACE, 
-=======
-    		constants.keyCodes.SPAWN_MARK_UP, 
-    		constants.keyCodes.SPAWN_MARK_DOWN,
-    		constants.keyCodes.SPAWN_MARK_LEFT, 
-    		constants.keyCodes.SPAWN_MARK_RIGHT,
-            constants.keyCodes.SPAWN_MARK_SPEDED_UP,
->>>>>>> 84c066f47574b598f4d77bc935306fca6e190676
     		constants.keyCodes.LEFT, 
     		constants.keyCodes.UP, 
     		constants.keyCodes.RIGHT, 
