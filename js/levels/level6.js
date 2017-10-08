@@ -9,7 +9,7 @@
     "^^^SETTINGS^^^"+
     "^^^MACROS^^^" +
      "*****************************************************\n" +
-     "*                          w             @     <    *\n" +
+     "*                          w             @     <<<  *\n" +
      "*                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww*\n" +
      "*                              wwwwwwwwwwwwwwwwwwwww*\n" +
      "*                              ww                   *\n" +
