@@ -20,7 +20,13 @@ this['@dna/panel'] = function(_) {
 		img: _.res.speedupMark,
 		value : constants.objects.speedUpMark,
 		path : constants.path.SPEED_UP_MARKERS_COUNT
-	} ].map(function(i) {
+	},
+	{
+		img: _.res.removeMark,
+		value : constants.objects.removeMark,
+		path : constants.path.REMOVE_MARKERS_COUNT
+	}
+        ].map(function(i) {
 		return {
 			img: i.img,
 			value : i.value,

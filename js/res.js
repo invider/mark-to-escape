@@ -28,8 +28,10 @@ _patch$gameResources = {
     up_mark: 'img/up_mark.png',
     down_mark: 'img/down_mark.png',
     speedupMark: 'img/speed_up.png',
+    removeMark: 'img/remove.png',
     water: 'img/water.png',
-    wall: 'img/wall.png'
+    wall: 'img/wall.png',
+    levelWall: 'img/levelWall.png'
 };
 
 _patch$sfxResources = {

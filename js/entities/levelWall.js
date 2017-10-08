@@ -24,7 +24,7 @@ this['@dna/levelWall'] = function(_, dat) {
         draw: function(ctx) {
             // draw dot
             ctx.imageSmoothingEnabled = false
-            ctx.drawImage(this._.res.wall, this.x, this.y, 1, 1);
+            ctx.drawImage(this._.res.levelWall, this.x, this.y, 1, 1);
         }
     }
 
