@@ -103,6 +103,7 @@
                 r.push("");
             }
         }});
+        console.log("parsed data:", parsed);
         parsed.forEach(function(row){
             var x = 0;
             row.forEach(function(symbol){

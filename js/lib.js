@@ -22,7 +22,9 @@ _patch$gamelib = {
         return !solid
     },
 
-    getObjectsAt: function(x, y){
+    getObjectsAt: function(x, y, opts){
+        let opts = opts || {};
+
         x = Math.floor(x);
         y = Math.floor(y);
 
