@@ -109,7 +109,13 @@ Frame.prototype.onAttached = function(node, name, parent) {
     this.__.onAttached(node, name, parent)
 };
 Frame.prototype.detach = function(node) {
-    this.detachByName(node.name);
+    node.__.detachByName(node.name);
+};
+Frame.prototype.detachAll = function() {
+    while(this._ls.length){
+        let node = this._ls[0];
+        node.__.detachByName(node.name);
+    }
 };
 Frame.prototype.detachByName = function(name) {
     var obj = this[name];

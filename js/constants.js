@@ -12,7 +12,10 @@ const constants = {
         LEFT_MARKERS_COUNT: "env/player/markers/left",
         UP_MARKERS_COUNT: "env/player/markers/up",
         DOWN_MARKERS_COUNT: "env/player/markers/down",
-        DUDES_SPAWNED_COUNT: "env/player/dudesSpawned"
+        DUDES_SPAWNED_COUNT: "env/player/dudesSpawned",
+        DUDES_ESCAPED: "env/player/dudesEscaped",
+        DUDES_DEAD: "env/player/dudesDead",
+        GOAL: "env/player/goal"
     },
     keyCodes: {
     	UP: 38,
@@ -25,7 +28,8 @@ const constants = {
         SPAWN_MARK_RIGHT: 52,
     },
     types:{
-        MARK: "mark"
+        MARK: "mark",
+        DUDE: "dude"
     },
     objects:{
         leftMark: "dna/leftMark",
