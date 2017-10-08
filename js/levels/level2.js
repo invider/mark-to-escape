@@ -2,6 +2,7 @@
     "env/player/markers/right=1\n"+
     "env/player/markers/down=1\n"+
     "env/player/goal=1\n"+
+    "env/player/levelName=You will not passsssssss!!!!!\n"+
     "^^^SETTINGS^^^"+
     "M_z_@100" +
     "^^^MACROS^^^" +
