@@ -28,7 +28,7 @@ const constants = {
         SPAWN_MARK_DOWN: 50,
         SPAWN_MARK_LEFT: 51,
         SPAWN_MARK_RIGHT: 52,
-        SPAWN_SPEDED_UP: 53
+        SPAWN_MARK_SPEDED_UP: 53
     },
     types:{
         MARK: "mark",
