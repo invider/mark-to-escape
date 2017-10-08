@@ -13,6 +13,7 @@ const constants = {
         UP_MARKERS_COUNT: "env/player/markers/up",
         DOWN_MARKERS_COUNT: "env/player/markers/down",
         DUDES_SPAWNED_COUNT: "env/player/dudesSpawned",
+        SPEED_UP_MARKERS_COUNT: "env/player/markers/speedUp",
         DUDES_ESCAPED: "env/player/dudesEscaped",
         DUDES_DEAD: "env/player/dudesDead",
         GOAL: "env/player/goal",
@@ -27,6 +28,7 @@ const constants = {
         SPAWN_MARK_DOWN: 50,
         SPAWN_MARK_LEFT: 51,
         SPAWN_MARK_RIGHT: 52,
+        SPAWN_SPEDED_UP: 53
     },
     types:{
         MARK: "mark",
@@ -38,7 +40,8 @@ const constants = {
         leftMark: "dna/leftMark",
         rightMark: "dna/rightMark",
         upMark: "dna/upMark",
-        downMark: "dna/downMark"
+        downMark: "dna/downMark",
+        speedUpMark: "dna/speedUpMark"
     },
     layers:{
         TILES:"lab/camera/tiles"

@@ -101,6 +101,9 @@ this['@dna/player'] = function(_, dat) {
             } else if (key == constants.keyCodes.SPAWN_MARK_DOWN){
                 toSpawn = constants.objects.downMark;
                 toCheck = constants.path.DOWN_MARKERS_COUNT;
+            } else if (key == constants.keyCodes.SPAWN_SPEDED_UP){
+                toSpawn = constants.objects.speedUpMark;
+                toCheck = constants.path.SPEED_UP_MARKERS_COUNT;
             }
 
             if (toSpawn){
