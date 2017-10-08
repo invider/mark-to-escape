@@ -40,15 +40,17 @@ _patch$gamelib = {
         return !solid
     },
 
-    getObjectsAt: function(x, y, opts){
-        opts = opts || {};
-
+    getObjectsAt: function(x, y){
         x = Math.floor(x);
         y = Math.floor(y);
         let lists = this._.lab.camera._ls.concat(
             this._.lab.camera.tiles._ls
         ).concat(this._.lab.camera.dudes._ls)
         return lists.filter(e => e.alive && Math.floor(e.x) === x && Math.floor(e.y) === y );
+    },
+
+    getTilesAt: function(x, y) {
+        return this.getObjectsAt(x, y).filter(o => o.stepOver);
     },
     
     getMarksAt: function(x, y){

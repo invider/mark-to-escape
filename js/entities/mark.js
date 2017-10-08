@@ -17,14 +17,14 @@
                 w: 1,
                 h: 1,
 
-                hit: function (hitter) {
-                    // we got a dude here
-                    this._.log.debug('marking  ' + direction + ': ' + hitter.name)
-                },
-                
-                applyMarker: function(target) {
+                stepOver: function(target) {
                 	target.direction = direction
                 },
+                
+                /*
+                applyMarker: function(target) {
+                },
+                */
 
                 // evolve
                 evo: function (scene, delta) {

@@ -30,9 +30,9 @@ this['@dna/dude'] = function(_, dat) {
         		this.x = cell.getX()
         		this.y = cell.getY()
         		
-        		var markers = this._.lib.getMarksAt(cell.getX(), cell.getY())
-        		if(markers.length > 0) {
-        			markers[0].applyMarker(this)
+        		var tiles = this._.lib.getTilesAt(this.x, this.y)
+        		if(tiles.length > 0) {
+        			tiles[0].stepOver(this)
         		}
         		
         		this.fixDirection()
