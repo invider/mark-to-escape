@@ -15,6 +15,7 @@
                 y: dat.y,
                 spawned: 0,
                 toSpawn: 10,
+                direction:direction,
                 // evolve
                 evo: function (scene, delta) {
                     this.dt += delta;
@@ -45,8 +46,7 @@
                             break;
                     }
                     let spawned = this._.sys.spawn('dna/dude', 'lab/camera/dudes', pos);
-                    let alreadySpawned = this._.selectOneNumber(constants.path.DUDES_SPAWNED_COUNT);
-                    this._.patch(this._, constants.path.DUDES_SPAWNED_COUNT, alreadySpawned + 1);
+                    this._.lib.selectUtils.inc(constants.path.DUDES_SPAWNED_COUNT);
                 },
                 // show the dot
                 draw: function (ctx) {

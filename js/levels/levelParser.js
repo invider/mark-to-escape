@@ -100,7 +100,7 @@
         parsed.forEach(function(r){ params.w = Math.max(params.w, r.length)});
         parsed.forEach(function(r){ if (r.length < params.w) {
             for (var i = 0; i < params.w - r.length; i++){
-                r.push("");
+                r.push(" ");
             }
         }});
         console.log("parsed data:", parsed);

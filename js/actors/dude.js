@@ -3,6 +3,8 @@ this['@dna/dude'] = function(_, dat) {
     // generate unique id
     if (!this._serial) this._serial = 1;
     else this._serial++;
+    
+    var cell = _.lib.cell(dat.x, dat.y)
 
     return {
         type: 'dude',
@@ -21,35 +23,20 @@ this['@dna/dude'] = function(_, dat) {
         },
 
         evo: function (scene, delta) {
-            switch(this.direction){
-                case constants.dir.UP:
-                    this.testMove(0, -1)
-                    break;
-                case constants.dir.DOWN:
-                    this.testMove(0, 1)
-                    break;
-                case constants.dir.LEFT:
-                    this.testMove(0, 0)
-                    break;
-                case constants.dir.RIGHT:
-                    this.testMove(1, 0)
-                    break;
-            }
-
-            switch(this.direction){
-                case constants.dir.UP:
-                    this.y -= delta * this.speed;
-                    break;
-                case constants.dir.DOWN:
-                    this.y += delta * this.speed;
-                    break;
-                case constants.dir.LEFT:
-                    this.x -= delta * this.speed;
-                    break;
-                case constants.dir.RIGHT:
-                    this.x += delta * this.speed;
-                    break;
-            }
+        	this.x += delta * this.speed * this.direction.dx
+        	this.y += delta * this.speed * this.direction.dy
+        	
+        	if(cell.enter(this.x, this.y, this.direction)) {
+        		this.x = cell.getX()
+        		this.y = cell.getY()
+        		
+        		var markers = this._.lib.getMarksAt(cell.getX(), cell.getY())
+        		if(markers.length > 0) {
+        			markers[0].applyMarker(this)
+        		}
+        		
+        		this.fixDirection()
+        	}
         },
 
         draw: function(ctx) {
@@ -70,10 +57,20 @@ this['@dna/dude'] = function(_, dat) {
             ctx.restore()
         },
 
-        testMove: function(sx, sy) {
-            if (!this._.lib.isFree(this.x + sx, this.y + sy)) {
+        fixDirection: function() {
+            if (!this.checkTargetCellFree()) {
                 this.inverse()
+                if(!this.checkTargetCellFree()) {
+                	this.rotate()
+                    if(!this.checkTargetCellFree()) {
+                    	this.inverse()
+                    }
+                }
             }
+        },
+        
+        checkTargetCellFree: function() {
+            return this._.lib.isFree(cell.getX() + this.direction.dx, cell.getY() + this.direction.dy)
         },
 
         inverse: function() {
@@ -91,7 +88,23 @@ this['@dna/dude'] = function(_, dat) {
                     this.direction = constants.dir.LEFT
                     break;
             }
+        },
+        
+        rotate: function() {
+            switch(this.direction){
+            	case constants.dir.UP:
+            		this.direction = constants.dir.LEFT
+            		break;
+            	case constants.dir.LEFT:
+            		this.direction = constants.dir.DOWN
+            		break;
+            	case constants.dir.DOWN:
+            		this.direction = constants.dir.RIGHT
+            		break;
+            	case constants.dir.RIGHT:
+            		this.direction = constants.dir.UP
+            		break;
+            }
         }
     }
-
 };

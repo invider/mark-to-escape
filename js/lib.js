@@ -1,7 +1,25 @@
-
+_patch$gameLibselectUtils = {
+    _$patchAt: 'lib/selectUtils',
+    inc: function(path){
+        let val = this._.selectOneNumber(path);
+        this._.patch(this._, path, val + 1);
+        return val;
+    },
+    dec: function(path){
+        let val = this._.selectOneNumber(path);
+        this._.patch(this._, path, val - 1);
+        return val;
+    },
+    checkAndDec: function(path){
+        let val = this._.selectOneNumber(path);
+        if (val){
+            this._.patch(this._, path, val - 1);
+        }
+        return val;
+    }
+};
 _patch$gamelib = {
     _$patchAt: 'lib/',
-
     getSolid: function(x, y) {
         x = Math.floor(x);
         y = Math.floor(y);
@@ -32,10 +50,14 @@ _patch$gamelib = {
         ).concat(this._.lab.camera.dudes._ls)
         return lists.filter(e => e.alive && Math.floor(e.x) === x && Math.floor(e.y) === y );
     },
+    
     getMarksAt: function(x, y){
         return this.getObjectsAt(x, y).filter(o => o.type === constants.types.MARK);
     },
+    
     cell: function(cx, cy) {
+    	cx = Math.floor(cx)
+    	cy = Math.floor(cy)
     	return {
     		enter: function(x, y, dir) {
     			var cx2 = dir.r(x)
