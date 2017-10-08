@@ -91,18 +91,9 @@ this['@dna/player'] = function(_, dat) {
         		this.x = cell.getX();
         		this.y = cell.getY();
 
-                // hit a new cell - check if marker is there
-                let markers = this._.lib.getObjectsAt(cell.getX(), cell.getY()).filter( function(e) {
-                    return (e.type === 'mark')
-                })
-                if (markers.length > 0) {
-                    console.log('found markers')
-                    markers[0].hit(this)
-                }
-
                 this.chooseDirection()
                 this.fixDirection()
-                this.spawnMarks(lastKey)
+                this.spawnMarks()
         	} else if(d.none) {
         		this.chooseDirection()
                 this.fixDirection()
