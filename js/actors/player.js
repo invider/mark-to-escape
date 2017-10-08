@@ -21,7 +21,13 @@ this['@dna/player'] = function(_, dat) {
     				return true;
     			}
     			return false;
-    		}
+    		},
+            getX: function() {
+                return cx
+            },
+            getY: function() {
+                return cy
+            },
     	}
     })(Math.floor(dat.x), Math.floor(dat.y))
 	
@@ -30,8 +36,11 @@ this['@dna/player'] = function(_, dat) {
     else this._serial++;
 
     return {
+        type: 'player',
         name: 'player_' + this._serial,
         collidable: true,
+        markable: true,
+
         // state
         x: dat.x,
         y: dat.y,
@@ -41,7 +50,7 @@ this['@dna/player'] = function(_, dat) {
         direction: dir.right,
 
         hit: function(e) {
-            console.log('hit by ' + e.name)
+            //console.log('hit by ' + e.name)
         },
 
         evo: function(scene, dt) {
@@ -50,11 +59,22 @@ this['@dna/player'] = function(_, dat) {
 
             var k = scene.env.keys
             if (k[37] || k[38] || k[39] || k[40]) {
+                this._x = this.x
                 this.x += velocity * d.dx
+                this._y = this.y
                 this.y += velocity * d.dy
             }
 
         	if(cell.enter(this.x, this.y, d.r)) {
+                // hit a new cell - check if marker is there
+                let markers = this._.lib.getObjectsAt(cell.getX(), cell.getY()).filter( function(e) {
+                    return (e.type === 'mark')
+                })
+                if (markers.length > 0) {
+                    console.log('found markers')
+                    markers[0].hit(this)
+                }
+                
         		if(k[37]) {
         			this.direction = dir.left
         		} else if(k[38]) {

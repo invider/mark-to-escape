@@ -11,8 +11,10 @@ this['@dna/dude'] = function(_, dat) {
     else this._serial++;
 
     return {
+        type: 'dude',
         name: 'dude_' + this._serial,
-        collidable: true,
+        //markable: true,
+        //collidable: true,
         // state
         x: dat.x,
         y: dat.y,
@@ -42,15 +44,19 @@ this['@dna/dude'] = function(_, dat) {
 
             switch(this.direction){
                 case UP:
+                    this._y = this.y
                     this.y -= delta * this.speed;
                     break;
                 case DOWN:
+                    this._y = this.y
                     this.y += delta * this.speed;
                     break;
                 case LEFT:
+                    this._x = this.x
                     this.x -= delta * this.speed;
                     break;
                 case RIGHT:
+                    this._x = this.x
                     this.x += delta * this.speed;
                     break;
             }

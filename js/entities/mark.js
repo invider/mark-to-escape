@@ -8,12 +8,24 @@
 
         if (!this._serial) this._serial = 1;
         else this._serial++;
+
+        let dumpTime = 0
         return {
+            type: 'mark',
+            name: 'mark-' + this._serial,
+
+            // state
             x: dat.x,
             y: dat.y,
-            name: 'mark-' + this._serial,
-            // state
+            w: 1,
+            h: 1,
             direction: arguments.callee.direction,
+
+            hit: function(hitter) {
+                // we got a dude here
+                this._.log.debug('marking  ' + this.direction + ': ' + hitter.name)
+            },
+
             // evolve
             evo: function (scene, delta) {
                 // _.lib.getObjectsAt(this.x, this.y).forEach(function(o){
