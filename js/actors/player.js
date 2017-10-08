@@ -5,10 +5,7 @@ this['@dna/player'] = function(_, dat) {
     
     var lastKey = (function(key) {
     	var keys = [
-    		constants.keyCodes.SPAWN_MARK_UP, 
-    		constants.keyCodes.SPAWN_MARK_DOWN,
-    		constants.keyCodes.SPAWN_MARK_LEFT, 
-    		constants.keyCodes.SPAWN_MARK_RIGHT,
+    		constants.keyCodes.SPACE, 
     		constants.keyCodes.LEFT, 
     		constants.keyCodes.UP, 
     		constants.keyCodes.RIGHT, 
@@ -88,19 +85,19 @@ this['@dna/player'] = function(_, dat) {
         	}
         },
         spawnMarks:function(){
-            var toSpawn = false, toCheck = false, key = lastKey.value();
-            if (key == constants.keyCodes.SPAWN_MARK_LEFT){
-                toSpawn = constants.objects.leftMark;
-                toCheck = constants.path.LEFT_MARKERS_COUNT;
-            } else if (key == constants.keyCodes.SPAWN_MARK_RIGHT){
-                toSpawn = constants.objects.rightMark;
-                toCheck = constants.path.RIGHT_MARKERS_COUNT;
-            } else if (key == constants.keyCodes.SPAWN_MARK_UP){
-                toSpawn = constants.objects.upMark;
-                toCheck = constants.path.UP_MARKERS_COUNT;
-            } else if (key == constants.keyCodes.SPAWN_MARK_DOWN){
-                toSpawn = constants.objects.downMark;
-                toCheck = constants.path.DOWN_MARKERS_COUNT;
+            var toSpawn = false, toCheck = false;
+            
+            if(lastKey.value() == constants.keyCodes.SPACE) {
+            	toSpawn = this._.env.player.currentMark
+            	if(toSpawn == constants.objects.leftMark) {
+            		toCheck = constants.path.LEFT_MARKERS_COUNT;
+            	} else if(toSpawn == constants.objects.rightMark) {
+            		toCheck = constants.path.RIGHT_MARKERS_COUNT;
+            	} else if(toSpawn == constants.objects.upMark) {
+            		toCheck = constants.path.UP_MARKERS_COUNT;
+            	} else if(toSpawn == constants.objects.downMark) {
+            		toCheck = constants.path.DOWN_MARKERS_COUNT;
+            	}
             }
 
             if (toSpawn){

@@ -17,10 +17,12 @@ const constants = {
         GOAL: "env/player/goal"
     },
     keyCodes: {
+    	TAB: 9,
     	UP: 38,
     	DOWN: 40,
     	LEFT: 37,
     	RIGHT: 39,
+    	SPACE: 32,
         SPAWN_MARK_UP: 49,
         SPAWN_MARK_DOWN: 50,
         SPAWN_MARK_LEFT: 51,
