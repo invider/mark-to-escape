@@ -25,6 +25,7 @@ this['@dna/dude'] = function(_, dat) {
         evo: function (scene, delta) {
         	this.x += delta * this.speed * this.direction.dx
         	this.y += delta * this.speed * this.direction.dy
+        	
         	if(cell.enter(this.x, this.y, this.direction)) {
         		this.x = cell.getX()
         		this.y = cell.getY()
@@ -43,12 +44,20 @@ this['@dna/dude'] = function(_, dat) {
             ctx.drawImage(this._.res.player, this.x, this.y, 1, 1);
         },
 
-        fixDirection: function(sx, sy) {
-        	var sx = this.direction.dx
-        	var sy = this.direction.dy
-            if (!this._.lib.isFree(cell.getX() + sx, cell.getY() + sy)) {
+        fixDirection: function() {
+            if (!this.checkTargetCellFree()) {
                 this.inverse()
+                if(!this.checkTargetCellFree()) {
+                	this.rotate()
+                    if(!this.checkTargetCellFree()) {
+                    	this.inverse()
+                    }
+                }
             }
+        },
+        
+        checkTargetCellFree: function() {
+            return this._.lib.isFree(cell.getX() + this.direction.dx, cell.getY() + this.direction.dy)
         },
 
         inverse: function() {
@@ -66,7 +75,23 @@ this['@dna/dude'] = function(_, dat) {
                     this.direction = constants.dir.LEFT
                     break;
             }
+        },
+        
+        rotate: function() {
+            switch(this.direction){
+            	case constants.dir.UP:
+            		this.direction = constants.dir.LEFT
+            		break;
+            	case constants.dir.LEFT:
+            		this.direction = constants.dir.DOWN
+            		break;
+            	case constants.dir.DOWN:
+            		this.direction = constants.dir.RIGHT
+            		break;
+            	case constants.dir.RIGHT:
+            		this.direction = constants.dir.UP
+            		break;
+            }
         }
     }
-
 };
