@@ -8,10 +8,10 @@
     "^^^MACROS^^^" +
     "***********************************************\n" +
     "* >                                         < *\n" +
-    "* v wwwww  w  w wwww     wwww w     w www   v *\n" +
+    "* v wwwww  w  w wwww     wwww w     w wwww  v *\n" +
     "*     w    w  w w        w    ww    w w   w   *\n" +
-    "*     w    wwww ww    @  ww   w  w  w w   w   *\n" +
-    "*     w    w  w w        w    w    ww w   w   *\n" +
-    "* ^   w    w  w wwww     wwww w     w www   ^ *\n" +
+    "*     w    wwww ww    @  ww   w ww  w w   w   *\n" +
+    "*     w    w  w w        w    w   www w   w   *\n" +
+    "* ^   w    w  w wwww     wwww w     w wwww  ^ *\n" +
     "* >                                         < *\n" +
     "**********************************************\n";
