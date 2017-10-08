@@ -53,8 +53,21 @@ this['@dna/dude'] = function(_, dat) {
         },
 
         draw: function(ctx) {
+            let hw = this.w/2
+            let hh = this.h/2
+
+            ctx.save()
             ctx.imageSmoothingEnabled = false
-            ctx.drawImage(this._.res.player, this.x, this.y, 1, 1);
+			ctx.translate(this.x+hw, this.y+hh);
+
+            switch (this.direction) {
+                case constants.dir.RIGHT: ctx.rotate(Math.PI/2); break;
+                case constants.dir.LEFT: ctx.rotate(Math.PI+Math.PI/2); break;
+                case constants.dir.DOWN: ctx.rotate(Math.PI); break;
+            }
+
+            ctx.drawImage(this._.res.player, -hw, -hh, 1, 1);
+            ctx.restore()
         },
 
         testMove: function(sx, sy) {
