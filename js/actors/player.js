@@ -88,17 +88,17 @@ this['@dna/player'] = function(_, dat) {
         	}
         },
         spawnMarks:function(){
-            var toSpawn = false, toCheck = false;
-            if (lastKey.value() == constants.keyCodes.SPAWN_MARK_LEFT){
+            var toSpawn = false, toCheck = false, key = lastKey.value();
+            if (key == constants.keyCodes.SPAWN_MARK_LEFT){
                 toSpawn = constants.objects.leftMark;
                 toCheck = constants.path.LEFT_MARKERS_COUNT;
-            } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_RIGHT){
+            } else if (key == constants.keyCodes.SPAWN_MARK_RIGHT){
                 toSpawn = constants.objects.rightMark;
                 toCheck = constants.path.RIGHT_MARKERS_COUNT;
-            } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_UP){
+            } else if (key == constants.keyCodes.SPAWN_MARK_UP){
                 toSpawn = constants.objects.upMark;
                 toCheck = constants.path.UP_MARKERS_COUNT;
-            } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_DOWN){
+            } else if (key == constants.keyCodes.SPAWN_MARK_DOWN){
                 toSpawn = constants.objects.downMark;
                 toCheck = constants.path.DOWN_MARKERS_COUNT;
             }
