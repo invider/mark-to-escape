@@ -3,6 +3,8 @@ this['@dna/dude'] = function(_, dat) {
     // generate unique id
     if (!this._serial) this._serial = 1;
     else this._serial++;
+    
+    var cell = _.lib.cell(dat.x, dat.y)
 
     return {
         type: 'dude',
@@ -21,35 +23,19 @@ this['@dna/dude'] = function(_, dat) {
         },
 
         evo: function (scene, delta) {
-            switch(this.direction){
-                case constants.dir.UP:
-                    this.testMove(0, -1)
-                    break;
-                case constants.dir.DOWN:
-                    this.testMove(0, 1)
-                    break;
-                case constants.dir.LEFT:
-                    this.testMove(0, 0)
-                    break;
-                case constants.dir.RIGHT:
-                    this.testMove(1, 0)
-                    break;
-            }
-
-            switch(this.direction){
-                case constants.dir.UP:
-                    this.y -= delta * this.speed;
-                    break;
-                case constants.dir.DOWN:
-                    this.y += delta * this.speed;
-                    break;
-                case constants.dir.LEFT:
-                    this.x -= delta * this.speed;
-                    break;
-                case constants.dir.RIGHT:
-                    this.x += delta * this.speed;
-                    break;
-            }
+        	this.x += delta * this.speed * this.direction.dx
+        	this.y += delta * this.speed * this.direction.dy
+        	if(cell.enter(this.x, this.y, this.direction)) {
+        		this.x = cell.getX()
+        		this.y = cell.getY()
+        		
+        		var markers = this._.lib.getMarksAt(cell.getX(), cell.getY())
+        		if(markers.length > 0) {
+        			markers[0].applyMarker(this)
+        		}
+        		
+        		this.fixDirection()
+        	}
         },
 
         draw: function(ctx) {
@@ -57,8 +43,10 @@ this['@dna/dude'] = function(_, dat) {
             ctx.drawImage(this._.res.player, this.x, this.y, 1, 1);
         },
 
-        testMove: function(sx, sy) {
-            if (!this._.lib.isFree(this.x + sx, this.y + sy)) {
+        fixDirection: function(sx, sy) {
+        	var sx = this.direction.dx
+        	var sy = this.direction.dy
+            if (!this._.lib.isFree(cell.getX() + sx, cell.getY() + sy)) {
                 this.inverse()
             }
         },

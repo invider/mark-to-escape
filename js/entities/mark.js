@@ -21,6 +21,10 @@
                     // we got a dude here
                     this._.log.debug('marking  ' + direction + ': ' + hitter.name)
                 },
+                
+                applyMarker: function(target) {
+                	target.direction = direction
+                },
 
                 // evolve
                 evo: function (scene, delta) {
