@@ -1,7 +1,25 @@
-
+_patch$gameLibselectUtils = {
+    _$patchAt: 'lib/selectUtils',
+    inc: function(path){
+        let val = this._.selectOneNumber(path);
+        this._.patch(this._, path, val + 1);
+        return val;
+    },
+    dec: function(path){
+        let val = this._.selectOneNumber(path);
+        this._.patch(this._, path, val - 1);
+        return val;
+    },
+    checkAndDec: function(path){
+        let val = this._.selectOneNumber(path);
+        if (val){
+            this._.patch(this._, path, val - 1);
+        }
+        return val;
+    }
+};
 _patch$gamelib = {
     _$patchAt: 'lib/',
-
     getSolid: function(x, y) {
         x = Math.floor(x);
         y = Math.floor(y);

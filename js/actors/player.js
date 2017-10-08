@@ -102,26 +102,34 @@ this['@dna/player'] = function(_, dat) {
 
                 this.chooseDirection()
                 this.fixDirection()
-                this.spawnMarks()
+                this.spawnMarks(lastKey)
         	} else if(d.none) {
         		this.chooseDirection()
                 this.fixDirection()
                 this.spawnMarks()
         	}
         },
-        
         spawnMarks:function(){
-
+            var toSpawn = false, toCheck = false;
             if (lastKey.value() == constants.keyCodes.SPAWN_MARK_LEFT){
-                this.spawnMark(this.x, this.y, constants.objects.leftMark);
+                toSpawn = constants.objects.leftMark;
+                toCheck = constants.path.LEFT_MARKERS_COUNT;
             } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_RIGHT){
-                this.spawnMark(this.x, this.y, constants.objects.rightMark);
+                toSpawn = constants.objects.righttMark;
+                toCheck = constants.path.RIGHT_MARKERS_COUNT;
             } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_UP){
-                this.spawnMark(this.x, this.y, constants.objects.leftMark);
+                toSpawn = constants.objects.upMark;
+                toCheck = constants.path.UP_MARKERS_COUNT;
             } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_DOWN){
-                this.spawnMark(this.x, this.y, constants.objects.downMark);
+                toSpawn = constants.objects.downMark;
+                toCheck = constants.path.DOWN_MARKERS_COUNT;
             }
 
+            if (toSpawn){
+                if (this._.lib.selectUtils.checkAndDec(toCheck)){
+                    this.spawnMark(this.x, this.y, toSpawn);
+                }
+            }
         },
         
         spawnMark: function(x, y, type){
