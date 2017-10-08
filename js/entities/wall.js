@@ -15,7 +15,7 @@ this['@dna/wall'] = function(_, dat) {
         h: 1,
         w: 1,
         finish: function() {
-            this._.lib.sfx('killed', 0.5)
+            this._.lib.sfx('wallDestroyed', 1)
         },
         // show the dot
         draw: function(ctx) {

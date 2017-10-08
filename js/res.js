@@ -41,5 +41,7 @@ _patch$sfxResources = {
     spawned: 'sfx/jump-1.wav',
     killed: 'sfx/jump-3.wav',
     turned: 'sfx/pickup-2.wav',
+    wallDestroyed: 'sfx/hit-4.wav',
+    wallHit: 'sfx/hit-5.wav',
 };
 

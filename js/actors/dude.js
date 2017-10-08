@@ -129,6 +129,7 @@ this['@dna/dude'] = function(_, dat) {
                     this.direction = constants.dir.LEFT
                     break;
             }
+            this._.lib.sfx('wallHit', 1)
         },
         
         rotate: function() {
