@@ -5,7 +5,15 @@ this['@dna/player'] = function(_, dat) {
     
     var lastKey = (function(key) {
     	var keys = [
+<<<<<<< HEAD
     		constants.keyCodes.SPACE, 
+=======
+    		constants.keyCodes.SPAWN_MARK_UP, 
+    		constants.keyCodes.SPAWN_MARK_DOWN,
+    		constants.keyCodes.SPAWN_MARK_LEFT, 
+    		constants.keyCodes.SPAWN_MARK_RIGHT,
+            constants.keyCodes.SPAWN_MARK_SPEDED_UP,
+>>>>>>> 84c066f47574b598f4d77bc935306fca6e190676
     		constants.keyCodes.LEFT, 
     		constants.keyCodes.UP, 
     		constants.keyCodes.RIGHT, 
@@ -101,9 +109,11 @@ this['@dna/player'] = function(_, dat) {
             		toCheck = constants.path.UP_MARKERS_COUNT;
             	} else if(toSpawn == constants.objects.downMark) {
             		toCheck = constants.path.DOWN_MARKERS_COUNT;
+            	} else if(toSpawn == constants.objects.speedUpMark) {
+            		toCheck = constants.path.SPEED_UP_MARKERS_COUNT;
             	}
             }
-
+    
             if (toSpawn){
                 if (this._.selectOneNumber(toCheck)){
                     if (this.spawnMark(this.x, this.y, toSpawn)){

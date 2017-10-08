@@ -12,6 +12,9 @@ this['@dna/panel'] = function(_) {
 	}, {
 		value : constants.objects.rightMark,
 		path : constants.path.RIGHT_MARKERS_COUNT
+	}, {
+		value : constants.objects.speedUpMark,
+		path : constants.path.SPEED_UP_MARKERS_COUNT
 	} ].map(function(i) {
 		return {
 			value : i.value,
@@ -41,7 +44,7 @@ this['@dna/panel'] = function(_) {
 			var w = 70, s = 10
 			var x = (canvas.width - items.length * (w + s) + s) / 2
 			var y = canvas.height - w - s
-			
+
 			ctx.lineWidth = 0.7 * s
 			for ( var i in items) {
 				ctx.strokeStyle = items[i].selected ? '#ff0000' : '#0000ff'
