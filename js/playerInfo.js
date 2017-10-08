@@ -29,7 +29,7 @@ this['@dna/playerInfo'] = function() {
             var dead = this._.selectOneNumber(constants.path.DUDES_DEAD);
             txt += this.addVar({caption: "Alive:", value: (spawned - dead) + "/" + spawned});
             txt += this.addVar({caption: "Goal:", value: this._.selectOneNumber(constants.path.DUDES_ESCAPED) + "/" + this._.selectOneNumber(constants.path.GOAL)});
-            txt += this.addVar({caption: "LVL:", path: constants.path.LEVEL_NAME, number: 1});
+            txt += this.addVar({caption: "LVL:", path: constants.path.PLAYER_LEVEL, number: 1});
 
 			// "env/player/markers/right=3\n"+
             // "env/player/markers/down=2\n"+
