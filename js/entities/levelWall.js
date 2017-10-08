@@ -22,8 +22,8 @@ this['@dna/levelWall'] = function(_, dat) {
         // show the dot
         draw: function(ctx) {
             // draw dot
-            ctx.fillStyle="#0000FF";
-            ctx.fillRect(this.x, this.y, 1, 1);
+            ctx.imageSmoothingEnabled = false
+            ctx.drawImage(this._.res.wall, this.x, this.y, 1, 1);
         }
     }
 

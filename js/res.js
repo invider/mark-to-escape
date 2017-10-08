@@ -10,6 +10,7 @@ _patch$gameResources = {
     up_mark: 'img/up_mark.png',
     down_mark: 'img/down_mark.png',
     water: 'img/water.png',
+    wall: 'img/wall.png'
 };
 
 _patch$sfxResources = {
