@@ -88,7 +88,7 @@ var Frame = function(initObj) {
 Frame.prototype._frame = true
 Frame.prototype.type = "frame"
 Frame.prototype.attach = function(node, name) {
-    if (!node) return
+    if (node === undefined) return
     if (this._locked) throw { src: this, msg: "can't attach - node is locked" }
     if (isObj(node) || isFun(node)) {
         node._ = this._
@@ -497,7 +497,7 @@ _scene.patch = function(target, path, node) {
         return _scene.patch(nextNode, nextPath, node)
     }
 
-    if (node) {
+    if (node !== undefined) {
         // found the patch point - attach the node
         if (isFrame(target)) {
             if (path === '') {
