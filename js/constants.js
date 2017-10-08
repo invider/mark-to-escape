@@ -32,7 +32,9 @@ const constants = {
     },
     types:{
         MARK: "mark",
-        DUDE: "dude"
+        DUDE: "dude",
+        WALL: "wall",
+        LEVEL_WALL: "levelWall",
     },
     objects:{
         leftMark: "dna/leftMark",

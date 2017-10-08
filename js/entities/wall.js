@@ -6,6 +6,7 @@ this['@dna/wall'] = function(_, dat) {
 
     return {
         name: 'wall-' + this._serial,
+        type: constants.types.WALL,
         solid: true,
         // state
         dt: 0,
@@ -13,7 +14,9 @@ this['@dna/wall'] = function(_, dat) {
         y: dat.y,
         h: 1,
         w: 1,
-
+        finish: function() {
+            this._.lib.sfx('killed', 0.5)
+        },
         // show the dot
         draw: function(ctx) {
             ctx.imageSmoothingEnabled = false

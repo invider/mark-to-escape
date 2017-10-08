@@ -9,6 +9,7 @@ _patch$gameResources = {
     right_mark: 'img/right_mark.png',
     up_mark: 'img/up_mark.png',
     down_mark: 'img/down_mark.png',
+    speedupMark: 'img/speed_up.png',
     water: 'img/water.png',
     wall: 'img/wall.png'
 };

@@ -13,6 +13,7 @@ this['@lib/spawnLevel'] = function(lvl){
         '^': 'upSpawn',
         'v': 'downSpawn',
         'W': 'water',
+        'S': 'speedUpMark',
         'R': 'rightMark',
         'L': 'leftMark',
         'U': 'upMark',

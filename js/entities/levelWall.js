@@ -6,6 +6,7 @@ this['@dna/levelWall'] = function(_, dat) {
 
     return {
         name: 'edge-' + this._serial,
+        type: 'levelWall',
         solid: true,
         // state
         dt: 0,
