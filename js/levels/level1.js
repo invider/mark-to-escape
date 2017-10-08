@@ -4,6 +4,7 @@
     "env/player/goal=1\n"+
     "env/player/levelName=TestLevel\n"+
     "env/player/markers/speedUp=1\n"+
+    "env/player/markers/remove=1\n"+
     "^^^SETTINGS^^^"+
     "M_z_@100" +
     "^^^MACROS^^^" +

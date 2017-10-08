@@ -1,4 +1,3 @@
-
 this['@dna/player'] = function(_, dat) {
 
 	var cell = _.lib.cell(dat.x, dat.y)
@@ -138,7 +137,9 @@ this['@dna/player'] = function(_, dat) {
             }
     
             if (toSpawn){
-                if (this._.selectOneNumber(toCheck)){
+                if (toSpawn === constants.objects.removeMark){
+                    let mark = this.removeMarksAt(this.x, this.y);
+                } else if (this._.selectOneNumber(toCheck)){
                     if (this.spawnMark(this.x, this.y, toSpawn)){
                         this._.lib.selectUtils.dec(toCheck);
                     }
@@ -158,7 +159,15 @@ this['@dna/player'] = function(_, dat) {
             }
             return false;
         },
-        
+        removeMarksAt: function(x, y){
+            let marks = this._.lib.getMarksAt(this.x, this.y);
+            if (marks.length) {
+                this._.lib.selectUtils.detachObj(marks[0]);
+                return true;
+            }
+            return false;
+        },
+
         draw: function(ctx) {
             let hw = this.w/2
             let hh = this.h/2

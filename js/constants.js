@@ -17,7 +17,8 @@ const constants = {
         DUDES_ESCAPED: "env/player/dudesEscaped",
         DUDES_DEAD: "env/player/dudesDead",
         GOAL: "env/player/goal",
-        LEVEL_NAME: "env/player/levelName"
+        LEVEL_NAME: "env/player/levelName",
+        REMOVE_MARKERS_COUNT: "env/player/markers/remove"
     },
     keyCodes: {
     	TAB: 9,
@@ -44,7 +45,8 @@ const constants = {
         rightMark: "dna/rightMark",
         upMark: "dna/upMark",
         downMark: "dna/downMark",
-        speedUpMark: "dna/speedUpMark"
+        speedUpMark: "dna/speedUpMark",
+        removeMark: "dna/removeMark"
     },
     layers:{
         TILES:"lab/camera/tiles"
