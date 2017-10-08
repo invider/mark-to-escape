@@ -81,12 +81,8 @@ this['@dna/player'] = function(_, dat) {
             this.y += velocity * dt * this.direction.dy
             
             lastKey.remember()
-        	if(cell.enter(this)) {
+        	if(cell.enter(this) || this.direction.none) {
                 this.chooseDirection()
-                this.fixDirection()
-                this.spawnMarks()
-        	} else if(this.direction.none) {
-        		this.chooseDirection()
                 this.fixDirection()
                 this.spawnMarks()
         	}
