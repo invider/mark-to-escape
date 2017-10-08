@@ -2,6 +2,7 @@
 this['@dna/player'] = function(_, dat) {
 	
 	var dir = {
+		none: { dx: 0, dy: 0, r: Math.floor, none: true },
 		up: { dx: 0, dy: -1, r: Math.ceil },
 		down: { dx: 0, dy: 1, r: Math.floor },
 		left: { dx: -1, dy: 0, r: Math.ceil },
@@ -30,6 +31,28 @@ this['@dna/player'] = function(_, dat) {
             },
     	}
     })(Math.floor(dat.x), Math.floor(dat.y))
+    
+    var nextDirection = (function(d) {
+    	return {
+    		select: function() {
+    			var k = scene.env.keys
+            	if(k[37]) {
+        			d = dir.left
+        		} else if(k[38]) {
+        			d = dir.up
+        		} else if(k[39]) {
+        			d = dir.right
+        		} else if(k[40]) {
+        			d = dir.down
+        		} else {
+        			d = dir.none
+        		}
+    		},
+    		value: function() {
+    			return d
+    		}
+    	}
+    })(dir.none)
 	
     // generate unique id
     if (!this._serial) this._serial = 1;
@@ -47,32 +70,30 @@ this['@dna/player'] = function(_, dat) {
         w: 1,
         h: 1,
 
-        direction: dir.right,
+        direction: dir.none,
 
         hit: function(e) {
             //console.log('hit by ' + e.name)
         },
+        
+        chooseDirection: function() {
+        	this.direction = nextDirection.value()
+        },
 
         evo: function(scene, dt) {
-        	var velocity = 1.5 * dt
+        	var velocity = 4 * dt
+        	
         	var d = this.direction
-            var k = scene.env.keys
-            for (var k in k){
-                console.log(k);
-                break;
-            }
-
-            if (k[37] || k[38] || k[39] || k[40]) {
-                this._x = this.x
-                this.x += velocity * d.dx
-                this._y = this.y
-                this.y += velocity * d.dy
-            }
+            this.x += velocity * d.dx
+            this.y += velocity * d.dy
             this.spawnMarks(k);
+            nextDirection.select()
         	if(cell.enter(this.x, this.y, d.r)) {
                 // hit a new cell - check if marker is there
         		this.x = cell.getX();
         		this.y = cell.getY();
+        		
+                // hit a new cell - check if marker is there
                 let markers = this._.lib.getObjectsAt(cell.getX(), cell.getY()).filter( function(e) {
                     return (e.type === 'mark')
                 })
@@ -81,32 +102,12 @@ this['@dna/player'] = function(_, dat) {
                     markers[0].hit(this)
                 }
                 
-        		if(k[37]) {
-        			this.direction = dir.left
-        		} else if(k[38]) {
-        			this.direction = dir.up
-        		} else if(k[39]) {
-        			this.direction = dir.right
-        		} else if(k[40]) {
-        			this.direction = dir.down
-        		}
+                this.chooseDirection()
+        	} else if(d.none) {
+        		this.chooseDirection()
         	}
         },
-        spawnMarks:function(k){
-            var marks = this._.lib.getMarksAt(this.x, this.y);
-            if (!marks.length){
-                if (k[constants.keyCodes.SPAWN_MARK_LEFT]){
-                    this.spawnMark(this.x, this.y, constants.objects.leftMark);
-                }
-            }
-        },
-        spawnMark: function(x, y, type){
-            console.log("spawning mark:" + type);
-            this._.sys.spawn('dna/' + type, 'lab/camera', {
-                x: x,
-                y: y,
-            });
-        },
+        
         // show the dot
         draw: function(ctx) {
         	var x = this.x
