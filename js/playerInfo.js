@@ -24,7 +24,9 @@ this['@dna/playerInfo'] = function() {
             txt += this.addVar({caption: "LM:", path: constants.path.LEFT_MARKERS_COUNT, number: 1});
             txt += this.addVar({caption: "DM:", path: constants.path.DOWN_MARKERS_COUNT, number: 1});
             txt += this.addVar({caption: "UM:", path: constants.path.UP_MARKERS_COUNT, number: 1});
-            txt += this.addVar({caption: "Alive:", value: this._.selectOneNumber(constants.path.DUDES_SPAWNED_COUNT) + "/" + this._.selectOneNumber(constants.path.DUDES_DEAD)});
+            var spawned = this._.selectOneNumber(constants.path.DUDES_SPAWNED_COUNT);
+            var dead = this._.selectOneNumber(constants.path.DUDES_DEAD);
+            txt += this.addVar({caption: "Alive:", value: (spawned - dead) + "/" + spawned});
             txt += this.addVar({caption: "Goal:", value: this._.selectOneNumber(constants.path.DUDES_ESCAPED) + "/" + this._.selectOneNumber(constants.path.GOAL)});
             txt += this.addVar({caption: "LVL:", path: constants.path.PLAYER_LEVEL, number: 1});
 
