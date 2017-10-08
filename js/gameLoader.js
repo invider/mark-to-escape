@@ -16,5 +16,6 @@ var _boot$gameLogic = function(_) {
     _.load(__basePath + 'entities/mark.js');
     _.load(__basePath + 'entities/levelWall.js');
     _.load(__basePath + 'entities/rightSpawn.js');
+    _.load(__basePath + 'playerInfo.js');
     _.load(__basePath + 'debug.js');
 };

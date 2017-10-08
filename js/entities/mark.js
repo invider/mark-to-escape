@@ -16,10 +16,10 @@
             direction: arguments.callee.direction,
             // evolve
             evo: function (scene, delta) {
-                _.lib.getObjectsAt(this.x, this.y).forEach(function(o){
-                    console.log(o);
-                    debugger;
-                });
+                // _.lib.getObjectsAt(this.x, this.y).forEach(function(o){
+                //     console.log(o);
+                //     debugger;
+                // });
             },
 
             // show the dot
