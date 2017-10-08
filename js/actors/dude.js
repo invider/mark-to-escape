@@ -61,6 +61,9 @@ this['@dna/dude'] = function(_, dat) {
                 	this.rotate()
                     if(!this.checkTargetCellFree()) {
                     	this.inverse()
+                    	if(!this.checkTargetCellFree()) {
+                    		this.direction = constants.dir.NONE
+                    	}
                     }
                 }
             }
