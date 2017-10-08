@@ -63,10 +63,12 @@ this['@dna/dude'] = function(_, dat) {
             ctx.restore()
         },
         checkToKill:function(){
-            var walls = this._.lib.getObjectsAt(cell.getX() + this.direction.dx, cell.getY() + this.direction.dy)
-                .filter(o => o.type === constants.types.WALL)
-            if (walls.length){
-                this._.lib.selectUtils.detachObj(walls[0]);
+            if (this.speed > this.defaultSpeed) {
+                var walls = this._.lib.getObjectsAt(cell.getX() + this.direction.dx, cell.getY() + this.direction.dy)
+                    .filter(o => o.type === constants.types.WALL)
+                if (walls.length) {
+                    this._.lib.selectUtils.detachObj(walls[0]);
+                }
             }
         },
         fixDirection: function() {
