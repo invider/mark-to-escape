@@ -3,6 +3,7 @@
  * @param lvl {number} level number
  */
 this['@lib/spawnLevel'] = function(lvl){
+    this._.lib.clearLevel();
     var my = this;
     var typeMap = {
         '*': 'levelWall',
@@ -44,8 +45,8 @@ this['@lib/spawnLevel'] = function(lvl){
         }
     });
 };
-
-this['@lib/spawnNextLevel'] = function(){
+this['@lib/clearLevel'] = function(){
+    console.log("Clearing level");
     this._.lib.selectUtils.nullifyPaths([
         constants.path.GOAL,
         constants.path.DUDES_ESCAPED,
@@ -57,10 +58,18 @@ this['@lib/spawnNextLevel'] = function(){
         constants.path.SPEED_UP_MARKERS_COUNT,
         constants.path.REMOVE_MARKERS_COUNT
     ], 0);
+    this._.lib.selectUtils.nullifyPaths([
+        constants.path.RESTART_MARKERS_COUNT,
+    ], 100000);
     //
     //  clean /camera/tiles and camera/dudes
     //
     this._.selectOne("/lab/camera/tiles").detachAll();
     this._.selectOne("/lab/camera/dudes").detachAll();
+};
+this['@lib/restartLevel'] = function(){
+    return this._.lib.spawnLevel(this._.selectOneNumber(constants.path.PLAYER_LEVEL));
+};
+this['@lib/spawnNextLevel'] = function(){
     return this._.lib.spawnLevel(this._.selectOneNumber(constants.path.PLAYER_LEVEL) + 1);
 };

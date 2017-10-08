@@ -18,6 +18,7 @@ const constants = {
         DUDES_DEAD: "env/player/dudesDead",
         GOAL: "env/player/goal",
         LEVEL_NAME: "env/player/levelName",
+        RESTART_MARKERS_COUNT: "env/player/markers/restart",
         REMOVE_MARKERS_COUNT: "env/player/markers/remove"
     },
     keyCodes: {
@@ -46,7 +47,8 @@ const constants = {
         upMark: "dna/upMark",
         downMark: "dna/downMark",
         speedUpMark: "dna/speedUpMark",
-        removeMark: "dna/removeMark"
+        removeMark: "dna/removeMark",
+        restartMark: "dna/restartMark"
     },
     layers:{
         TILES:"lab/camera/tiles"

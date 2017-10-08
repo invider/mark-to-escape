@@ -22,6 +22,7 @@ _patch$gameResources = {
     removeMark: 'img/remove.png',
     water: 'img/water.png',
     wall: 'img/wall.png',
+    restartMark: 'img/restart.png',
     levelWall: 'img/levelWall.png'
 };
 
