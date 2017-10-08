@@ -27,8 +27,10 @@ _patch$gameLibselectUtils = {
         });
     }
 };
+
 _patch$gamelib = {
     _$patchAt: 'lib/',
+
     getSolid: function(x, y) {
         x = Math.floor(x);
         y = Math.floor(y);
@@ -91,6 +93,18 @@ _patch$gamelib = {
                 return cy
             },
     	}
-    }
+    },
+
+    sfx: function(sampleName, volume) {
+        let sample = this._.res.sfx[sampleName]
+        if (!sample) {
+            this._.log.err("can't find sfx to play: " + sampleName)
+            return
+        }
+        if (!volume) volume = 1
+
+        sample.volume = volume
+        sample.play()
+    },
 
 };
