@@ -13,6 +13,7 @@ _setup$game = function(_) {
     _.sys.spawn('dna/group', 'lab/camera', { name: 'dudes' })
 
     _.sys.spawn('dna/playerInfo', 'lab')
+    _.sys.spawn('dna/panel', 'lab')
     _.lab.camera.viewport(30,11);
 
     let levelParams = _.lib.spawnLevel(1);

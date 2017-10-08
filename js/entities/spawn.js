@@ -48,9 +48,7 @@
                     let spawned = this._.sys.spawn('dna/dude', 'lab/camera/dudes', pos);
                     this._.lib.selectUtils.inc(constants.path.DUDES_SPAWNED_COUNT);
                 },
-                // show the dot
                 draw: function (ctx) {
-                    // draw dot
                     ctx.fillStyle = "#FF00FF";
                     ctx.fillRect(this.x, this.y, 1, 1);
                 }

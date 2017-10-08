@@ -26,10 +26,7 @@ this['@dna/dude'] = function(_, dat) {
         	this.x += delta * this.speed * this.direction.dx
         	this.y += delta * this.speed * this.direction.dy
         	
-        	if(cell.enter(this.x, this.y, this.direction)) {
-        		this.x = cell.getX()
-        		this.y = cell.getY()
-        		
+        	if(cell.enter(this)) {
         		var tiles = this._.lib.getTilesAt(this.x, this.y)
         		if(tiles.length > 0) {
         			tiles[0].stepOver(this)
@@ -64,6 +61,9 @@ this['@dna/dude'] = function(_, dat) {
                 	this.rotate()
                     if(!this.checkTargetCellFree()) {
                     	this.inverse()
+                    	if(!this.checkTargetCellFree()) {
+                    		this.direction = constants.dir.NONE
+                    	}
                     }
                 }
             }

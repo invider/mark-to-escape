@@ -30,13 +30,9 @@ this['@dna/player'] = function(_, dat) {
     	}
     })(0)
 
-    // generate unique id
-    if (!this._serial) this._serial = 1;
-    else this._serial++;
-
     return {
         type: 'player',
-        name: 'player_' + this._serial,
+        name: 'player',
         collidable: true,
         markable: true,
 
@@ -80,22 +76,13 @@ this['@dna/player'] = function(_, dat) {
         },
 
         evo: function(scene, dt) {
-        	var velocity = 4 * dt
-
-        	var d = this.direction
-            this.x += velocity * d.dx
-            this.y += velocity * d.dy
+        	var velocity = 4
+            this.x += velocity * dt * this.direction.dx
+            this.y += velocity * dt * this.direction.dy
             
             lastKey.remember()
-        	if(cell.enter(this.x, this.y, d)) {
-        		this.x = cell.getX();
-        		this.y = cell.getY();
-
+        	if(cell.enter(this) || this.direction.none) {
                 this.chooseDirection()
-                this.fixDirection()
-                this.spawnMarks()
-        	} else if(d.none) {
-        		this.chooseDirection()
                 this.fixDirection()
                 this.spawnMarks()
         	}
