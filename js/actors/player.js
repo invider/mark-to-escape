@@ -151,7 +151,9 @@ this['@dna/player'] = function(_, dat) {
             ctx.imageSmoothingEnabled = false
 			ctx.translate(this.x+hw, this.y+hh);
 
-            switch (this.direction) {
+            if (!this.direction.none) this._direction = this.direction
+            switch (this._direction) {
+                case constants.dir.UP: break;
                 case constants.dir.RIGHT: ctx.rotate(Math.PI/2); break;
                 case constants.dir.LEFT: ctx.rotate(Math.PI+Math.PI/2); break;
                 case constants.dir.DOWN: ctx.rotate(Math.PI); break;
