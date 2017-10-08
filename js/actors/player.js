@@ -44,6 +44,10 @@ this['@dna/player'] = function(_, dat) {
 
         direction: constants.dir.NONE,
 
+        spawn: function() {
+            this.img = this._.res.player
+        },
+
         hit: function(e) {
             //console.log('hit by ' + e.name)
         },
@@ -144,7 +148,7 @@ this['@dna/player'] = function(_, dat) {
                 case constants.dir.DOWN: ctx.rotate(Math.PI); break;
             }
 
-            ctx.drawImage(this._.res.player, -hw, -hh, 1, 1);
+            ctx.drawImage(this.img[0], -hw, -hh, 1, 1);
             ctx.restore()
         }
     }
