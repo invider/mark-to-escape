@@ -191,8 +191,8 @@ Frame.prototype.select = function(predicate) {
 			}
 
 			let res = []
-			for (let k in this._dir) {
-				let o = this._dir[k]
+			for (let k in this) {
+				let o = this[k]
 				if (nextName === '*' || k.includes(nextName) || (o.tag && o.tag.includes(nextName))) {
 					if (isFrame(o)) {
 						res = res.concat(o.select(nextPath))
@@ -497,9 +497,6 @@ _scene.patch = function(target, path, node) {
     }
 
     // found the patch point - attach the node
-    if (node === 2){
-        debugger;
-    }
     if (isFrame(target)) {
         if (path === '') {
             target.attach(node)
@@ -509,6 +506,7 @@ _scene.patch = function(target, path, node) {
             } else if (target[path] !== undefined) {
                 // TODO doesn't work property for frames - _dir and _ls stays the same
                 target[path] = node
+                target._dir[path] = node
             } else {
                 target.attach(node, path)
             }
@@ -522,6 +520,7 @@ _scene.patch = function(target, path, node) {
         } else if (target[path] !== undefined) {
             // TODO doesn't work property for frames - _dir and _ls stays the same
             target[path] = node
+            target._dir[path] = node
         }
     }
 
