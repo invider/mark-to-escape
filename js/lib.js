@@ -27,9 +27,7 @@ _patch$gamelib = {
 
         x = Math.floor(x);
         y = Math.floor(y);
-
-        this._.lab.camera._ls.filter(e => e.alive && Math.floor(e.x) === x && Math.floor(e.y) === y );
-        return solid;
+        return this._.lab.camera._ls.filter(e => e.alive && Math.floor(e.x) === x && Math.floor(e.y) === y );
     }
 
 };
