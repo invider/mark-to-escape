@@ -20,10 +20,11 @@ this['@dna/dude'] = function(_, dat) {
         defaultSpeed: 1,
         direction: dat.direction,
 
+        // animation
         animFrame: 0,
         animState: 0,
         animStart: 0,
-        animEnd: 6,
+        animEnd: 7,
         animSpeed: 0.2,
 
         spawn: function() {
