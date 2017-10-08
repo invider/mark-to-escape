@@ -11,3 +11,10 @@ _patch$gameResources = {
     down_mark: 'img/down_mark.png'
 };
 
+_patch$sfxResources = {
+    _$patchAt: 'res/sfx',
+
+    jump_1: 'sfx/jump-1.wav',
+    jump_2: 'sfx/jump-1.wav',
+};
+

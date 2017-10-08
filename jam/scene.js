@@ -414,6 +414,12 @@ Mod.prototype.load = function(src, target, ext) {
     } else if (ext === 'ttf') {
 
     } else if (ext === 'wav') {
+        this.log.out('loading sfx [' + name + ']: ' + src)
+        var node = new Audio(src);
+        node.preload = true;
+        if (isFrame(target)) target.attach(node, name)
+        else if (isObj(target)) target[name] = node
+        return node
 
     } else if (ext === 'ogg') {
 
