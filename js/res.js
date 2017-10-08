@@ -3,6 +3,16 @@ _patch$gameResources = {
     _$patchAt: 'res',
 
     player: [
+        'img/player_t1.png',
+        'img/player_t2.png',
+        'img/player_t3.png',
+        'img/player_t2.png',
+        'img/player_t1.png',
+        'img/player_t4.png',
+        'img/player_t5.png',
+        'img/player_t4.png',
+    ],
+    dude: [
         'img/dude_t1.png',
         'img/dude_t2.png',
         'img/dude_t3.png',
@@ -12,7 +22,6 @@ _patch$gameResources = {
         'img/dude_t5.png',
         'img/dude_t4.png',
     ],
-    dude: 'img/dude_t1.png',
     exit: 'img/exit.png',
     left_mark: 'img/left_mark.png',
     right_mark: 'img/right_mark.png',
