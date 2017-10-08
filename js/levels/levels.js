@@ -7,6 +7,7 @@ var _boot$loadLevels = function(_){
     _.load(__levelsBase + 'level2.js');
     _.load(__levelsBase + 'level3.js');
     _.load(__levelsBase + 'level4.js');
+    _.load(__levelsBase + 'last_level.js');
 };
 
 
