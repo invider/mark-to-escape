@@ -122,7 +122,7 @@ this['@dna/player'] = function(_, dat) {
                 this._.lib.spawnNextLevel();
                 delete scene.env.keys[constants.keyCodes.NEXT_LEVEL];
             } else if(lastKey.value() == constants.keyCodes.SPACE) {
-            	toSpawn = this._.env.player.currentMark
+            	toSpawn = this._.env.player.currentMark;
             	if(toSpawn == constants.objects.leftMark) {
             		toCheck = constants.path.LEFT_MARKERS_COUNT;
             	} else if(toSpawn == constants.objects.rightMark) {
@@ -134,10 +134,12 @@ this['@dna/player'] = function(_, dat) {
             	} else if(toSpawn == constants.objects.speedUpMark) {
             		toCheck = constants.path.SPEED_UP_MARKERS_COUNT;
             	}
+                delete scene.env.keys[constants.keyCodes.SPACE];
             }
     
             if (toSpawn){
                 if (toSpawn === constants.objects.restartMark){
+                    debugger;
                     this._.lib.restartLevel();
                 } else if (toSpawn === constants.objects.removeMark){
                     let mark = this.removeMarksAt(this.x, this.y);
