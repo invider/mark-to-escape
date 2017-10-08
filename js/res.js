@@ -25,7 +25,7 @@ _patch$gameResources = {
 
 _patch$sfxResources = {
     _$patchAt: 'res/sfx',
-
+    speedUp: 'sfx/jump-1.wav',
     spawned: 'sfx/jump-1.wav',
     killed: 'sfx/jump-3.wav',
     turned: 'sfx/pickup-2.wav',
