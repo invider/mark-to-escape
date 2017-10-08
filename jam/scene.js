@@ -135,6 +135,36 @@ Frame.prototype.apply = function(fn, predicate) {
     return i
 }
 Frame.prototype.collide = function(fn, predicate) {
+    let i = 0
+    if (isFun(predicate)) {
+        let ls = this._ls
+		ls.forEach( function(e) {
+			if (predicate(e)) {
+                ls.forEach( function(o) {
+                    if (predicate(o)) {
+                        if (e !== o) fn(e, o)
+                    }
+                })
+            }
+		})
+    } else if (isString(predicate)) {
+        let ls = this.select(predicate)
+        ls.forEach( function(e) {
+            ls.forEach( function(o) {
+                if (e !== o) fn(e, o)
+                i++
+            })
+        })
+    } else {
+        let ls = this._ls
+		ls.forEach( function(e) {
+            ls.forEach( function(o) {
+                if (e !== o) fn(e, o)
+                i++
+            })
+        })
+    }
+    return i
 }
 Frame.prototype.map = function(fn) {
 }
@@ -271,6 +301,10 @@ var Mod = function(initObj) {
     this.attach(new Frame({
         name: "lib",
     }))
+    // augment functions
+    this.attach(new Frame({
+        name: "aug",
+    }))
     // static environment data entities
     this.attach(new Frame({
         name: "env",
@@ -280,10 +314,15 @@ var Mod = function(initObj) {
         name: 'lab',
         onAttached: function(node) {
             //this._.log.debug('spawned ' + node.name)
+            // normalize and augment the node
             node.alive = true
             if (!isFun(node.draw)) node.draw = false
             if (!isFun(node.evo)) node.evo = false
             if (isFun(node.spawn)) node.spawn()
+
+            this._.aug._ls.forEach( function(aug) {
+                aug(node)
+            })
         }
     }))
 }

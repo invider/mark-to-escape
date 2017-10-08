@@ -31,18 +31,30 @@ this['@dna/player'] = function(_, dat) {
 
     return {
         name: 'player_' + this._serial,
+        collidable: true,
         // state
         x: dat.x,
         y: dat.y,
+        w: 1,
+        h: 1,
+
         direction: dir.right,
 
+        hit: function(e) {
+            console.log('hit by ' + e.name)
+        },
+
         evo: function(scene, dt) {
-        	var velocity = 0.8 * dt
+        	var velocity = 1.5 * dt
         	var d = this.direction
-        	this.x += velocity * d.dx
-        	this.y += velocity * d.dy
+
+            var k = scene.env.keys
+            if (k[37] || k[38] || k[39] || k[40]) {
+                this.x += velocity * d.dx
+                this.y += velocity * d.dy
+            }
+
         	if(cell.enter(this.x, this.y, d.r)) {
-        		var k = scene.env.keys
         		if(k[37]) {
         			this.direction = dir.left
         		} else if(k[38]) {
