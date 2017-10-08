@@ -115,7 +115,7 @@ this['@dna/player'] = function(_, dat) {
                 toSpawn = constants.objects.leftMark;
                 toCheck = constants.path.LEFT_MARKERS_COUNT;
             } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_RIGHT){
-                toSpawn = constants.objects.righttMark;
+                toSpawn = constants.objects.rightMark;
                 toCheck = constants.path.RIGHT_MARKERS_COUNT;
             } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_UP){
                 toSpawn = constants.objects.upMark;
