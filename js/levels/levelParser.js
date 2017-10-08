@@ -108,7 +108,7 @@
             var x = 0;
             row.forEach(function(symbol){
                 let param = undefined;
-                let parametricRes = PARAMETRIC_RE.exec(symbol)
+                let parametricRes = PARAMETRIC_RE.exec(symbol);
                 if (parametricRes){
                     param = parametricRes[1];
                     symbol = symbol[0];
