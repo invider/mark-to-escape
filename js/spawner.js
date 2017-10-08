@@ -18,7 +18,7 @@ this['@lib/spawnLevel'] = function(lvl){
         'D': 'downMark',
         'X': 'exit'
     };
-    this._.patch(constants.path.PLAYER_LEVEL, lvl);
+    this._.patch(this._, constants.path.PLAYER_LEVEL, lvl);
     return this._.lib.parser.parse(this._.selectOne("lib/levels/level" + lvl), function(x, y, type, params, param) {
         let dna = typeMap[type];
         if (dna){
