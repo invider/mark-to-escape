@@ -460,12 +460,13 @@ _scene.attach(new Frame({
 
 _scene.patch = function(target, path, node) {
 
-    if (!node) throw { src: this, msg: 'node is missing for: ' + path }
     if (!isMutable(target)) throw { src: this, msg: "can't attach to imutable node @" + path }
+
+    if (path.startsWith('@')) path = path.substring(1)
 
     if (path === '') {
         // patch point is a directory - find if node is named
-        if (isString(node.name)) {
+        if (node && isString(node.name)) {
             path = node.name
         }
     }
@@ -496,38 +497,40 @@ _scene.patch = function(target, path, node) {
         return _scene.patch(nextNode, nextPath, node)
     }
 
-    // found the patch point - attach the node
-    if (isFrame(target)) {
-        if (path === '') {
-            target.attach(node)
-        } else {
+    if (node) {
+        // found the patch point - attach the node
+        if (isFrame(target)) {
+            if (path === '') {
+                target.attach(node)
+            } else {
+                if (isObj(target[path])) {
+                    augment(target[path], node)
+                } else if (target[path] !== undefined) {
+                    // TODO doesn't work property for frames - _dir and _ls stays the same
+                    target[path] = node
+                    target._dir[path] = node
+                } else {
+                    target.attach(node, path)
+                }
+            }
+        } else if (isArray(target)) {
+            target.push(node)
+        } else if (isObj(target)) {
+            if (path === '') throw { src: this, msg: "can't attach anonymous node to " + target }
             if (isObj(target[path])) {
                 augment(target[path], node)
             } else if (target[path] !== undefined) {
                 // TODO doesn't work property for frames - _dir and _ls stays the same
                 target[path] = node
                 target._dir[path] = node
-            } else {
-                target.attach(node, path)
             }
         }
-    } else if (isArray(target)) {
-        target.push(node)
-    } else if (isObj(target)) {
-        if (path === '') throw { src: this, msg: "can't attach anonymous node to " + target }
-        if (isObj(target[path])) {
-            augment(target[path], node)
-        } else if (target[path] !== undefined) {
-            // TODO doesn't work property for frames - _dir and _ls stays the same
-            target[path] = node
-            target._dir[path] = node
-        }
-    }
 
-    // load resources if applicable
-    if (isFun(node.load)) {
-        node.load(this)
-        node.load = true // replace function with true, so we'd not call it second time
+        // load resources if applicable
+        if (isFun(node.load)) {
+            node.load(this)
+            node.load = true // replace function with true, so we'd not call it second time
+        }
     }
 }
 

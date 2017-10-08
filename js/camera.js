@@ -68,3 +68,21 @@ this['@dna/camera'] = function() {
 		}
 	})
 }
+
+this['@dna/group'] = function(_, init) {
+    return new $.sys.Frame({
+        name: init.name,
+
+        evo: function(scene, dt) {
+            this._ls.forEach(function(e) {
+                if (e.evo) e.evo(scene, dt)
+            })
+        },
+
+        draw: function(ctx) {
+            this._ls.forEach(function(e) {
+                if (e.draw) e.draw(ctx)
+            })
+        },
+    });
+}

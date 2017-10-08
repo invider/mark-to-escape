@@ -44,7 +44,7 @@
                         pos.x += 1;
                         break;
                 }
-                let spawned = this._.sys.spawn('dna/dude', 'lab/camera', pos);
+                let spawned = this._.sys.spawn('dna/dude', 'lab/camera/dudes', pos);
                 let alreadySpawned = this._.selectOneNumber(constants.path.DUDES_SPAWNED_COUNT);
                 this._.patch(this._, constants.path.DUDES_SPAWNED_COUNT, alreadySpawned + 1);
             },

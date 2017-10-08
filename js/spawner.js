@@ -22,7 +22,9 @@ this['@lib/spawnLevel'] = function(lvl){
     return this._.lib.parser.parse(this._.selectOne("lib/levels/level" + lvl), function(x, y, type, params, param) {
         let dna = typeMap[type];
         if (dna){
-            let entity = my._.sys.spawn('dna/' + dna, 'lab/camera', {
+            let spawnTarget = 'lab/camera/tiles'
+            if (dna === 'player') spawnTarget = 'lab/camera/dudes'
+            let entity = my._.sys.spawn('dna/' + dna, spawnTarget, {
                 x: x,
                 y: y,
             });
