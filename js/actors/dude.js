@@ -1,11 +1,5 @@
 
 this['@dna/dude'] = function(_, dat) {
-
-    const UP = 'UP';
-    const DOWN = 'DOWN';
-    const LEFT = 'LEFT';
-    const RIGHT = 'RIGHT';
-
     // generate unique id
     if (!this._serial) this._serial = 1;
     else this._serial++;
@@ -28,35 +22,31 @@ this['@dna/dude'] = function(_, dat) {
 
         evo: function (scene, delta) {
             switch(this.direction){
-                case UP:
+                case constants.dir.UP:
                     this.testMove(0, -1)
                     break;
-                case DOWN:
+                case constants.dir.DOWN:
                     this.testMove(0, 1)
                     break;
-                case LEFT:
+                case constants.dir.LEFT:
                     this.testMove(0, 0)
                     break;
-                case RIGHT:
+                case constants.dir.RIGHT:
                     this.testMove(1, 0)
                     break;
             }
 
             switch(this.direction){
-                case UP:
-                    this._y = this.y
+                case constants.dir.UP:
                     this.y -= delta * this.speed;
                     break;
-                case DOWN:
-                    this._y = this.y
+                case constants.dir.DOWN:
                     this.y += delta * this.speed;
                     break;
-                case LEFT:
-                    this._x = this.x
+                case constants.dir.LEFT:
                     this.x -= delta * this.speed;
                     break;
-                case RIGHT:
-                    this._x = this.x
+                case constants.dir.RIGHT:
                     this.x += delta * this.speed;
                     break;
             }
@@ -75,17 +65,17 @@ this['@dna/dude'] = function(_, dat) {
 
         inverse: function() {
             switch(this.direction){
-                case UP:
-                    this.direction = DOWN
+                case constants.dir.UP:
+                    this.direction = constants.dir.DOWN
                     break;
-                case DOWN:
-                    this.direction = UP
+                case constants.dir.DOWN:
+                    this.direction = constants.dir.UP
                     break;
-                case LEFT:
-                    this.direction = RIGHT
+                case constants.dir.LEFT:
+                    this.direction = constants.dir.RIGHT
                     break;
-                case RIGHT:
-                    this.direction = LEFT
+                case constants.dir.RIGHT:
+                    this.direction = constants.dir.LEFT
                     break;
             }
         }

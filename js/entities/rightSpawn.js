@@ -1,9 +1,5 @@
 // dot actor
 (function() {
-    const UP = 'UP';
-    const DOWN = 'DOWN';
-    const LEFT = 'LEFT';
-    const RIGHT = 'RIGHT';
     this['@dna/rightSpawn'] = function (_, dat) {
 
         if (!this._serial) this._serial = 1;
@@ -35,16 +31,16 @@
                     direction: this.direction
                 };
                 switch (this.direction){
-                    case UP:
+                    case constants.dir.UP:
                         pos.y -= 1;
                         break;
-                    case DOWN:
+                    case constants.dir.DOWN:
                         pos.y += 1;
                         break;
-                    case LEFT:
+                    case constants.dir.LEFT:
                         pos.x -= 1;
                         break;
-                    case RIGHT:
+                    case constants.dir.RIGHT:
                         pos.x += 1;
                         break;
                 }
@@ -65,8 +61,8 @@
     this['@dna/upSpawn'] = this['@dna/rightSpawn'];
     this['@dna/downSpawn'] = this['@dna/rightSpawn'];
 
-    this['@dna/upSpawn'].direction = UP;
-    this['@dna/downSpawn'].direction = DOWN;
-    this['@dna/leftSpawn'].direction = LEFT;
-    this['@dna/rightSpawn'].direction = RIGHT;
+    this['@dna/upSpawn'].direction = constants.dir.UP;
+    this['@dna/downSpawn'].direction = constants.dir.DOWN;
+    this['@dna/leftSpawn'].direction = constants.dir.LEFT;
+    this['@dna/rightSpawn'].direction = constants.dir.RIGHT;
 })();

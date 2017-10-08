@@ -4,5 +4,6 @@ _patch$gameResources = {
 
     player: 'img/dude_1.png',
     dude: 'img/dude_2.png',
-}
+    exit: 'img/exit.png'
+};
 

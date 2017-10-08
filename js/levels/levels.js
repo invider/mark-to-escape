@@ -6,6 +6,14 @@ var _boot$loadLevels = function(_){
     _.load(__levelsBase + 'level1.js');
 };
 
+
+//  Level string format:
+//  variable=value\n
+//  var2 = val2
+// ^^^SETTINGS^^^
+// M_F_D22
+// ^^^MACROS^^^
+//
 //
 //  @ - Player spawn
 //  X - exit
@@ -15,7 +23,6 @@ var _boot$loadLevels = function(_){
 //  ^ - up dude spawn
 //  v - down dude spawn
 //  w - regular wall
-//  M - macro in format: M_Letter_symbols
 //  U - Turn UP mark
 //  D - Turn Down mark
 //  L - Turn Left mark
@@ -23,3 +30,4 @@ var _boot$loadLevels = function(_){
 //  Space - empty cell
 //  \n - horizontal level end
 //
+
