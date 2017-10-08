@@ -7,7 +7,7 @@ _patch$gamelib = {
         y = Math.floor(y);
 
         let solid;
-        this._.lab.camera._ls.forEach(function(e) {
+        this._.lab.camera.tiles._ls.forEach(function(e) {
             if (e.alive && e.solid
                     && Math.floor(e.x) === x
                     && Math.floor(e.y) === y) {
