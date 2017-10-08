@@ -31,6 +31,28 @@ _patch$gamelib = {
     },
     getMarksAt: function(x, y){
         return this.getObjectsAt(x, y).filter(o => o.type === constants.types.MARK);
+    },
+    cell: function(cx, cy) {
+    	return {
+    		enter: function(x, y, dir) {
+    			var cx2 = dir.r(x)
+    			var cy2 = dir.r(y)
+    			var dx = Math.abs(x - cx2)
+    			var dy = Math.abs(y - cy2)
+    			if(cx != cx2 && dx < 0.5 || cy != cy2 && dy < 0.5) {
+    				cx = cx2
+    				cy = cy2
+    				return true;
+    			}
+    			return false;
+    		},
+            getX: function() {
+                return cx
+            },
+            getY: function() {
+                return cy
+            },
+    	}
     }
 
 };

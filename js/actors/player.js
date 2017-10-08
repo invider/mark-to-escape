@@ -1,36 +1,7 @@
 
 this['@dna/player'] = function(_, dat) {
-	
-	var dir = {
-		none: { dx: 0, dy: 0, r: Math.floor, none: true },
-		up: { dx: 0, dy: -1, r: Math.ceil },
-		down: { dx: 0, dy: 1, r: Math.floor },
-		left: { dx: -1, dy: 0, r: Math.ceil },
-		right: { dx: 1, dy: 0, r: Math.floor }
-	}
 
-	var cell = (function(cx, cy) {
-    	return {
-    		enter: function(x, y, r) {
-    			var cx2 = r(x)
-    			var cy2 = r(y)
-    			var dx = Math.abs(x - cx2)
-    			var dy = Math.abs(y - cy2)
-    			if(cx != cx2 && dx < 0.5 || cy != cy2 && dy < 0.5) {
-    				cx = cx2
-    				cy = cy2
-    				return true;
-    			}
-    			return false;
-    		},
-            getX: function() {
-                return cx
-            },
-            getY: function() {
-                return cy
-            },
-    	}
-    })(Math.floor(dat.x), Math.floor(dat.y))
+	var cell = _.lib.cell(Math.floor(dat.x), Math.floor(dat.y))
     
     var lastKey = (function(key) {
     	var keys = [
@@ -75,7 +46,7 @@ this['@dna/player'] = function(_, dat) {
         w: 1,
         h: 1,
 
-        direction: dir.none,
+        direction: constants.dir.NONE,
 
         hit: function(e) {
             //console.log('hit by ' + e.name)
@@ -84,24 +55,24 @@ this['@dna/player'] = function(_, dat) {
         chooseDirection: function() {
         	switch(lastKey.value()) {
         		case constants.keyCodes.UP:
-        			this.direction = dir.up
+        			this.direction = constants.dir.UP
         			break;
         		case constants.keyCodes.DOWN:
-        			this.direction = dir.down
+        			this.direction = constants.dir.DOWN
         			break;
         		case constants.keyCodes.LEFT:
-        			this.direction = dir.left
+        			this.direction = constants.dir.LEFT
         			break;
         		case constants.keyCodes.RIGHT:
-        			this.direction = dir.right
+        			this.direction = constants.dir.RIGHT
         			break;
             	default:
-            		this.direction = dir.none
+            		this.direction = constants.dir.NONE
         	}
             if (!this._.lib.isFree(
                         cell.getX() + this.direction.dx,
                         cell.getY() + this.direction.dy)) {
-                    this.direction = dir.none
+                    this.direction = constants.dir.NONE
             }
         },
 
@@ -113,7 +84,7 @@ this['@dna/player'] = function(_, dat) {
             this.y += velocity * d.dy
             
             lastKey.remember()
-        	if(cell.enter(this.x, this.y, d.r)) {
+        	if(cell.enter(this.x, this.y, d)) {
                 // hit a new cell - check if marker is there
         		this.x = cell.getX();
         		this.y = cell.getY();

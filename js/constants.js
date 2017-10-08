@@ -1,9 +1,10 @@
 const constants = {
     dir:{
-        UP : 'UP',
-        DOWN : 'DOWN',
-        LEFT : 'LEFT',
-        RIGHT : 'RIGHT'
+        UP : { dx: 0, dy: -1, r: Math.ceil },
+        DOWN : { dx: 0, dy: 1, r: Math.floor },
+        LEFT : { dx: -1, dy: 0, r: Math.ceil },
+        RIGHT : { dx: 1, dy: 0, r: Math.floor },
+        NONE: { dx: 0, dy: 0, r: Math.floor, none: true }
     },
     path:{
         PLAYER_LEVEL: "env/player/currentLevel",
