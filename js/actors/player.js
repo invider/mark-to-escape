@@ -42,6 +42,14 @@ this['@dna/player'] = function(_, dat) {
         w: 1,
         h: 1,
 
+        // animation
+        animFrame: 0,
+        animState: 0,
+        animStart: 0,
+        animEnd: 7,
+        animSpeed: 0.2,
+
+
         direction: constants.dir.NONE,
 
         spawn: function() {
@@ -79,9 +87,23 @@ this['@dna/player'] = function(_, dat) {
         	}
         },
 
+        anim: function(delta) {
+            // adjust animation
+            this.animState += delta
+            if (this.animState >= this.animSpeed) {
+                // next frame
+                this.animFrame ++
+                this.animState -= this.animSpeed
+                if (this.animFrame > this.animEnd) this.animFrame = this.animStart
+            }
+        },
+
         evo: function(scene, dt) {
+            this.anim(dt)
         	var velocity = 4
+            this._x = this.x
             this.x += velocity * dt * this.direction.dx
+            this._y = this.y
             this.y += velocity * dt * this.direction.dy
             
             lastKey.remember()
@@ -89,6 +111,12 @@ this['@dna/player'] = function(_, dat) {
                 this.chooseDirection()
                 this.fixDirection()
                 this.spawnMarks()
+
+                if (this.direction.none) {
+                    this.animEnd = 0
+                } else {
+                    this.animEnd = 7
+                }
         	}
         },
         spawnMarks:function(){
@@ -145,7 +173,7 @@ this['@dna/player'] = function(_, dat) {
                 case constants.dir.DOWN: ctx.rotate(Math.PI); break;
             }
 
-            ctx.drawImage(this.img[0], -hw, -hh, 1, 1);
+            ctx.drawImage(this.img[this.animFrame], -hw, -hh, 1, 1);
             ctx.restore()
         }
     }
