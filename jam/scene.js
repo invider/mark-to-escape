@@ -104,13 +104,28 @@ Frame.prototype.attach = function(node, name) {
     this._ls.push(node)
     if (isFun(node.init)) node.init() // initialize node
     this.onAttached(node, name, this)
-}
+};
 Frame.prototype.onAttached = function(node, name, parent) {
     this.__.onAttached(node, name, parent)
-}
+};
 Frame.prototype.detach = function(node) {
-	
-}
+    this.detachByName(node.name);
+};
+Frame.prototype.detachByName = function(name) {
+    var obj = this[name];
+    if (obj === undefined){
+        throw new Error("No node with name:" + name);
+    }
+    delete this[name];
+    delete this._dir[name];
+    let index = this._ls.indexOf(obj);
+    if (index === -1){
+        throw new Error("No such object in ls:" + name);
+    }
+    this._ls.splice(index, 1);
+
+};
+
 Frame.prototype.apply = function(fn, predicate) {
     let i = 0
     if (isFun(predicate)) {
