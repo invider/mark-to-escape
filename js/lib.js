@@ -97,6 +97,40 @@ _patch$gamelib = {
             },
     	}
     },
+    
+    menu: function(items, empty) {
+    	var curr = items[0], empty = empty || {}
+		for (var i = items.length; i-- > 0;) {
+			items[i].next = curr
+			curr = items[i]
+		}
+		return {
+			next : function() {
+				curr.selected = false
+				for (var i = curr.next; i != curr; i = i.next) {
+					if (i.canSelect()) {
+						curr = i
+						break;
+					}
+				}
+				curr.selected = curr.canSelect()
+				return this
+			},
+			
+			fixSelection: function() {
+				curr.selected = true
+				return curr.canSelect() ? this : this.next()
+			},
+
+			selectedValue : function() {
+				return curr.selected ? curr.value : empty
+			},
+
+			items : function() {
+				return items
+			}
+		}.fixSelection()
+    },
 
     sfx: function(sampleName, volume) {
         let sample = this._.res.sfx[sampleName]
