@@ -1,48 +1,30 @@
 this['@dna/panel'] = function(_) {
 	
-	function cycledList(items, f) {
-		var head = items[0]
-		for (var i = items.length; i-- > 0;) {
-			items[i].next = curr
-			curr = items[i]
-			curr.available = (function(path) {
-				return function() {
-					return _.lib.selectUtils.check(path)
-				}
-			})(curr.path)
-		}
-	}
-	
 	var menu = (function(items) {
 		var curr = items[0], empty = {}
 		for (var i = items.length; i-- > 0;) {
 			items[i].next = curr
 			curr = items[i]
-			curr.available = (function(path) {
-				return function() {
-					return _.lib.selectUtils.check(path)
-				}
-			})(curr.path)
 		}
 		return {
 			next : function() {
 				curr.selected = false
 				for (var i = curr.next; i != curr; i = i.next) {
-					if (i.available()) {
+					if (i.canSelect()) {
 						curr = i
 						break;
 					}
 				}
-				curr.selected = curr.available()
+				curr.selected = curr.canSelect()
 				return this
 			},
 			
 			adjust: function() {
-				return curr.available() ? this : this.next()
+				return curr.canSelect() ? this : this.next()
 			},
 
 			selection : function() {
-				return curr.available() ? curr.value : empty
+				return curr.canSelect() ? curr.value : empty
 			},
 
 			items : function() {
@@ -52,17 +34,24 @@ this['@dna/panel'] = function(_) {
 	})([ 
 		{
 			value : constants.objects.upMark,
-			path : constants.path.UP_MARKERS_COUNT
+			path: constants.path.UP_MARKERS_COUNT
 		}, {
 			value : constants.objects.downMark,
-			path : constants.path.DOWN_MARKERS_COUNT
+			path: constants.path.DOWN_MARKERS_COUNT
 		}, {
 			value : constants.objects.leftMark,
-			path : constants.path.LEFT_MARKERS_COUNT
+			path: constants.path.LEFT_MARKERS_COUNT
 		}, {
 			value : constants.objects.rightMark,
-			path : constants.path.RIGHT_MARKERS_COUNT
-		} ])
+			path: constants.path.RIGHT_MARKERS_COUNT
+		} ].map(function(i) {
+			return {
+				value: i.value,
+				canSelect: function() {
+					return _.lib.selectUtils.value(i.path)
+				}
+			}
+		}))
 
 	var time = 0
 	return new $.sys.Frame({

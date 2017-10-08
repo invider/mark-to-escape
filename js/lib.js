@@ -10,7 +10,7 @@ _patch$gameLibselectUtils = {
         this._.patch(this._, path, val - 1);
         return val - 1;
     },
-    check: function(path) {
+    value: function(path) {
     	return this._.selectOneNumber(path);
     },
     checkAndDec: function(path){
