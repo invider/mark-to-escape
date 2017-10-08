@@ -19,6 +19,14 @@ this['@dna/dude'] = function(_, dat) {
         speed: 1,
         direction: dat.direction,
 
+        spawn: function() {
+            this._.lib.sfx('spawned', 0.5)
+        },
+
+        finish: function() {
+            this._.lib.sfx('killed', 0.5)
+        },
+
         hit: function(e) {
         },
 

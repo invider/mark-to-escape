@@ -122,6 +122,8 @@ Frame.prototype.detachByName = function(name) {
     if (obj === undefined){
         throw new Error("No node with name:" + name);
     }
+    if (this[name].finish) this[name].finish()
+
     delete this[name];
     delete this._dir[name];
     let index = this._ls.indexOf(obj);
@@ -129,7 +131,6 @@ Frame.prototype.detachByName = function(name) {
         throw new Error("No such object in ls:" + name);
     }
     this._ls.splice(index, 1);
-
 };
 
 Frame.prototype.apply = function(fn, predicate) {

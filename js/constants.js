@@ -15,7 +15,8 @@ const constants = {
         DUDES_SPAWNED_COUNT: "env/player/dudesSpawned",
         DUDES_ESCAPED: "env/player/dudesEscaped",
         DUDES_DEAD: "env/player/dudesDead",
-        GOAL: "env/player/goal"
+        GOAL: "env/player/goal",
+        LEVEL_NAME: "env/player/levelName"
     },
     keyCodes: {
     	TAB: 9,

@@ -6,10 +6,11 @@ this['@dna/playerInfo'] = function() {
 		evo: function(scene, dt) {
 
 		},
-		txt: function(ctx, text){
+		txt: function(ctx, text, levelInfo){
             ctx.font = '48px zekton, impact, sans-serif';
             ctx.fillStyle="#FF0000";
-            ctx.fillText(text, 10, 50);
+            ctx.fillText(levelInfo, 10, 50);
+            ctx.fillText(text, 10, 90);
 		},
 		addVar: function(opts){
 			let v = opts.value === undefined ? this._.selectOne(opts.path): opts.value;
@@ -28,15 +29,13 @@ this['@dna/playerInfo'] = function() {
             var dead = this._.selectOneNumber(constants.path.DUDES_DEAD);
             txt += this.addVar({caption: "Alive:", value: (spawned - dead) + "/" + spawned});
             txt += this.addVar({caption: "Goal:", value: this._.selectOneNumber(constants.path.DUDES_ESCAPED) + "/" + this._.selectOneNumber(constants.path.GOAL)});
-            txt += this.addVar({caption: "LVL:", path: constants.path.PLAYER_LEVEL, number: 1});
-
-
+            txt += this.addVar({caption: "LVL:", path: constants.path.LEVEL_NAME, number: 1});
 
 			// "env/player/markers/right=3\n"+
             // "env/player/markers/down=2\n"+
             // "env/player/markers/up=1\n"+
             // "env/player/goal=10\n"+
-			this.txt(ctx, txt);
+			this.txt(ctx, txt, this._.selectOne(constants.path.LEVEL_NAME));
 		}
 	})
 }
