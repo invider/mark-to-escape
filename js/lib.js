@@ -3,12 +3,12 @@ _patch$gameLibselectUtils = {
     inc: function(path){
         let val = this._.selectOneNumber(path);
         this._.patch(this._, path, val + 1);
-        return val;
+        return val + 1;
     },
     dec: function(path){
         let val = this._.selectOneNumber(path);
         this._.patch(this._, path, val - 1);
-        return val;
+        return val - 1;
     },
     checkAndDec: function(path){
         let val = this._.selectOneNumber(path);
@@ -16,6 +16,15 @@ _patch$gameLibselectUtils = {
             this._.patch(this._, path, val - 1);
         }
         return val;
+    },
+    detachObj: function(obj){
+        obj.__.detach(obj);
+    },
+    nullifyPaths: function(paths, value){
+        var my = this;
+        paths.forEach(function(path){
+            my._.patch(my._, path, value);
+        });
     }
 };
 _patch$gamelib = {

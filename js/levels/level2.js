@@ -1,4 +1,4 @@
- this["@lib/levels/level1"] =
+ this["@lib/levels/level2"] =
     "env/player/markers/right=3\n"+
     "env/player/markers/down=2\n"+
     "env/player/markers/up=1\n"+

@@ -4,6 +4,7 @@ var _boot$loadLevels = function(_){
     var __levelsBase  = __basePath + "/levels/";
     _.load(__levelsBase + 'levelParser.js');
     _.load(__levelsBase + 'level1.js');
+    _.load(__levelsBase + 'level2.js');
 };
 
 

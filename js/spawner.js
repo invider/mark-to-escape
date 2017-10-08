@@ -19,7 +19,11 @@ this['@lib/spawnLevel'] = function(lvl){
         'X': 'exit'
     };
     this._.patch(this._, constants.path.PLAYER_LEVEL, lvl);
-    return this._.lib.parser.parse(this._.selectOne("lib/levels/level" + lvl), function(x, y, type, params, param) {
+    var lvlData = this._.selectOne("lib/levels/level" + lvl);
+    if (!lvlData){
+        throw new Error("No such level:" + lvl);
+    }
+    return this._.lib.parser.parse(lvlData, function(x, y, type, params, param) {
         let dna = typeMap[type];
         if (dna){
             let spawnTarget = 'lab/camera/tiles'
@@ -39,6 +43,20 @@ this['@lib/spawnLevel'] = function(lvl){
     });
 };
 
-this['@lib/spawnNextLevel'] = function(lvl){
+this['@lib/spawnNextLevel'] = function(){
+    this._.lib.selectUtils.nullifyPaths([
+        constants.path.GOAL,
+        constants.path.DUDES_ESCAPED,
+        constants.path.DOWN_MARKERS_COUNT,
+        constants.path.UP_MARKERS_COUNT,
+        constants.path.RIGHT_MARKERS_COUNT,
+        constants.path.LEFT_MARKERS_COUNT,
+        constants.path.DUDES_SPAWNED_COUNT
+    ], 0);
+    //
+    //  clean /camera/tiles and camera/dudes
+    //
+    this._.selectOne("/lab/camera/tiles").detachAll();
+    this._.selectOne("/lab/camera/dudes").detachAll();
     return this._.lib.spawnLevel(this._.selectOneNumber(constants.path.PLAYER_LEVEL) + 1);
 };

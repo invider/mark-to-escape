@@ -10,7 +10,15 @@ this['@dna/exit'] = function(_, dat) {
         dt: 0,
         x: dat.x,
         y: dat.y,
-
+        stepOver: function(o){
+            if (o.type === constants.types.DUDE){
+                this._.lib.selectUtils.detach(o);
+                let current = this._.lib.selectUtils.inc(constants.path.DUDES_ESCAPED);
+                if (current >= this._.selectOneNumber(constants.path.GOAL)){
+                    this._.lib.spawnNextLevel();
+                }
+            }
+        },
         // show the dot
         draw: function(ctx) {
             // draw dot
@@ -19,4 +27,4 @@ this['@dna/exit'] = function(_, dat) {
         }
     }
 
-}
+};
