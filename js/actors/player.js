@@ -69,11 +69,14 @@ this['@dna/player'] = function(_, dat) {
             	default:
             		this.direction = constants.dir.NONE
         	}
-            if (!this._.lib.isFree(
-                        cell.getX() + this.direction.dx,
-                        cell.getY() + this.direction.dy)) {
-                    this.direction = constants.dir.NONE
-            }
+        },
+        
+        fixDirection: function() {
+        	if (!this._.lib.isFree(
+                    cell.getX() + this.direction.dx,
+                    cell.getY() + this.direction.dy)) {
+                this.direction = constants.dir.NONE
+        	}
         },
 
         evo: function(scene, dt) {
@@ -85,7 +88,6 @@ this['@dna/player'] = function(_, dat) {
             
             lastKey.remember()
         	if(cell.enter(this.x, this.y, d)) {
-                // hit a new cell - check if marker is there
         		this.x = cell.getX();
         		this.y = cell.getY();
 
@@ -99,20 +101,31 @@ this['@dna/player'] = function(_, dat) {
                 }
 
                 this.chooseDirection()
-                this.spawnMarks();
+                this.fixDirection()
+                this.spawnMarks()
         	} else if(d.none) {
         		this.chooseDirection()
-                this.spawnMarks();
+                this.fixDirection()
+                this.spawnMarks()
         	}
         },
+        
         spawnMarks:function(){
             let marks = this._.lib.getMarksAt(this.x, this.y);
             if (!marks.length){
                 if (lastKey.value() == constants.keyCodes.SPAWN_MARK_LEFT){
                     this.spawnMark(this.x, this.y, constants.objects.leftMark);
+                } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_RIGHT){
+                    this.spawnMark(this.x, this.y, constants.objects.rightMark);
+                } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_UP){
+                    this.spawnMark(this.x, this.y, constants.objects.leftMark);
+                } else if (lastKey.value() == constants.keyCodes.SPAWN_MARK_DOWN){
+                    this.spawnMark(this.x, this.y, constants.objects.downMark);
                 }
+
             }
         },
+        
         spawnMark: function(x, y, type){
             console.log("spawning mark:" + type);
             this._.sys.spawn(type, constants.layers.TILES, {
@@ -120,25 +133,8 @@ this['@dna/player'] = function(_, dat) {
                 y: y,
             });
         },
-        // show the dot
+        
         draw: function(ctx) {
-        	var x = this.x
-        	var y = this.y
-            var d = this.direction
-            
-            /*
-            // draw dot
-            ctx.fillStyle="#FF1111";
-            ctx.fillRect(x, y, 1, 1);
-            
-            ctx.fillStyle = 'green'
-            ctx.beginPath()
-            ctx.moveTo(x + 0.5, y + 0.5)
-            ctx.lineTo(x + (1 + d.dx - d.dy) / 2, y + (1 + d.dy + d.dx) / 2)
-            ctx.lineTo(x + (1 + d.dx + d.dy) / 2, y + (1 + d.dy - d.dx) / 2)
-            ctx.closePath()
-            ctx.fill()
-            */
             ctx.imageSmoothingEnabled = false
             ctx.drawImage(this._.res.player, this.x, this.y, 1, 1);
         }
