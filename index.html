@@ -1,12 +1,49 @@
 <html>
-    <head>
-        <title>Mark to Escape</title>
-        <script src="jam/scene.js"></script>
-        <script src="js/mark.js"></script>
-        <script src="js/gameLoader.js"></script>
-        <script src="js/camera.js"></script>
-    </head>
+<head>
+	<title>Mark to Escape</title>
+	<script src="jam/scene.js"></script>
+	<script src="js/mark.js"></script>
+	<script src="js/gameLoader.js"></script>
+	<script src="js/camera.js"></script>
 
-    <body>
-    </body>
+	<style>
+	@font-face {
+		font-family: 'neuropol';
+		src: url('fnt/neuropol-x.ttf');
+	}
+	@font-face {
+		font-family: 'pixel';
+		src: url('fnt/cyrillic_pixel-7.ttf');
+	}
+	@font-face {
+		font-family: 'zekton';
+		src: url('fnt/zekton.ttf');
+	}
+	@font-face {
+		font-family: 'november';
+		src: url('fnt/november.ttf');
+	}
+	@font-face {
+		font-family: 'orange';
+		src: url('fnt/orange-kid.ttf');
+	}
+
+	#overlay {
+        position: absolute;
+		padding: 15px;
+        text-align: right;
+        right: 20px;
+        bottom: 20px;
+        z-index: 30;
+        color: #20FF20;
+        font-size: 24px;
+        font-family: orange, impact, sans-serif;
+		background:rgba(0,0,0,0.6);
+    }
+	</style>
+</head>
+
+<body>
+    <div id="overlay"></div>
+</body>
 </html>

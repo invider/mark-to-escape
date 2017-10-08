@@ -5,6 +5,7 @@ var __basePath = 'js/'
 var _boot$gameLogic = function(_) {
     _.log.debug('gameloader.js',  'loading game...');
 
+    _.load(__basePath + 'res.js');
     _.load(__basePath + 'lib.js');
     _.load(__basePath + 'actors/dude.js');
     _.load(__basePath + 'actors/player.js');
@@ -15,4 +16,5 @@ var _boot$gameLogic = function(_) {
     _.load(__basePath + 'entities/mark.js');
     _.load(__basePath + 'entities/levelWall.js');
     _.load(__basePath + 'entities/rightSpawn.js');
+    _.load(__basePath + 'debug.js');
 };

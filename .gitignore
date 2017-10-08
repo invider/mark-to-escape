@@ -59,3 +59,7 @@ typings/
 
 .idea
 .project
+
+# MacOS X specific
+.DS_Store
+
