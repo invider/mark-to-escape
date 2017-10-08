@@ -5,6 +5,7 @@ var _boot$loadLevels = function(_){
     _.load(__levelsBase + 'levelParser.js');
     _.load(__levelsBase + 'level1.js');
     _.load(__levelsBase + 'level2.js');
+    _.load(__levelsBase + 'level3.js');
 };
 
 
@@ -24,6 +25,7 @@ var _boot$loadLevels = function(_){
 //  ^ - up dude spawn
 //  v - down dude spawn
 //  w - regular wall
+//  W - Water
 //  U - Turn UP mark
 //  D - Turn Down mark
 //  L - Turn Left mark
