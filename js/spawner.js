@@ -18,6 +18,7 @@ this['@lib/spawnLevel'] = function(lvl){
         'D': 'downMark',
         'X': 'exit'
     };
+    this._.patch(constants.path.PLAYER_LEVEL, lvl);
     return this._.lib.parser.parse(this._.selectOne("lib/levels/level" + lvl), function(x, y, type, params, param) {
         let dna = typeMap[type];
         if (dna){
@@ -34,4 +35,8 @@ this['@lib/spawnLevel'] = function(lvl){
                 console.error("No such type [" + type + "]");
         }
     });
+};
+
+this['@lib/spawnNextLevel'] = function(lvl){
+    return this._.lib.spawnLevel(this._.selectOneNumber(constants.path.PLAYER_LEVEL) + 1);
 };

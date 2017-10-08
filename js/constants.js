@@ -4,5 +4,8 @@ const constants = {
         DOWN : 'DOWN',
         LEFT : 'LEFT',
         RIGHT : 'RIGHT'
+    },
+    path:{
+        PLAYER_LEVEL: "env/player/currentLevel"
     }
 };
