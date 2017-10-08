@@ -31,28 +31,33 @@ this['@dna/player'] = function(_, dat) {
             },
     	}
     })(Math.floor(dat.x), Math.floor(dat.y))
-
-    var nextDirection = (function(d) {
+    
+    var lastKey = (function(key) {
+    	var keys = [
+    		constants.keyCodes.SPAWN_MARK_UP, 
+    		constants.keyCodes.SPAWN_MARK_DOWN,
+    		constants.keyCodes.SPAWN_MARK_LEFT, 
+    		constants.keyCodes.SPAWN_MARK_RIGHT,
+    		constants.keyCodes.LEFT, 
+    		constants.keyCodes.UP, 
+    		constants.keyCodes.RIGHT, 
+    		constants.keyCodes.DOWN]
     	return {
-    		select: function() {
+    		remember: function() {
     			var k = scene.env.keys
-            	if(k[37]) {
-        			d = dir.left
-        		} else if(k[38]) {
-        			d = dir.up
-        		} else if(k[39]) {
-        			d = dir.right
-        		} else if(k[40]) {
-        			d = dir.down
-        		} else {
-        			d = dir.none
-        		}
+    			for(var i in keys) {
+    				if(k[keys[i]]) {
+    					key = keys[i]
+    					return
+    				}
+    			}
+    			key = 0
     		},
     		value: function() {
-    			return d
+    			return key
     		}
     	}
-    })(dir.none)
+    })(0)
 
     // generate unique id
     if (!this._serial) this._serial = 1;
@@ -77,7 +82,22 @@ this['@dna/player'] = function(_, dat) {
         },
 
         chooseDirection: function() {
-        	this.direction = nextDirection.value()
+        	switch(lastKey.value()) {
+        		case constants.keyCodes.UP:
+        			this.direction = dir.up
+        			break;
+        		case constants.keyCodes.DOWN:
+        			this.direction = dir.down
+        			break;
+        		case constants.keyCodes.LEFT:
+        			this.direction = dir.left
+        			break;
+        		case constants.keyCodes.RIGHT:
+        			this.direction = dir.right
+        			break;
+            	default:
+            		this.direction = dir.none
+        	}
         },
 
         evo: function(scene, dt) {
@@ -86,8 +106,8 @@ this['@dna/player'] = function(_, dat) {
         	var d = this.direction
             this.x += velocity * d.dx
             this.y += velocity * d.dy
-            this.spawnMarks();
-            nextDirection.select()
+            
+            lastKey.remember()
         	if(cell.enter(this.x, this.y, d.r)) {
                 // hit a new cell - check if marker is there
         		this.x = cell.getX();
@@ -103,15 +123,16 @@ this['@dna/player'] = function(_, dat) {
                 }
 
                 this.chooseDirection()
+                this.spawnMarks();
         	} else if(d.none) {
         		this.chooseDirection()
+                this.spawnMarks();
         	}
         },
         spawnMarks:function(){
-            let k = scene.env.keys;
             let marks = this._.lib.getMarksAt(this.x, this.y);
             if (!marks.length){
-                if (k[constants.keyCodes.SPAWN_MARK_LEFT]){
+                if (lastKey.value() == constants.keyCodes.SPAWN_MARK_LEFT){
                     this.spawnMark(this.x, this.y, constants.objects.leftMark);
                 }
             }

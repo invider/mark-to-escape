@@ -14,6 +14,10 @@ const constants = {
         DUDES_SPAWNED_COUNT: "env/player/dudesSpawned"
     },
     keyCodes: {
+    	UP: 38,
+    	DOWN: 40,
+    	LEFT: 37,
+    	RIGHT: 39,
         SPAWN_MARK_UP: 49,
         SPAWN_MARK_DOWN: 50,
         SPAWN_MARK_LEFT: 51,
