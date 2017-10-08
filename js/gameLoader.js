@@ -17,6 +17,7 @@ var _boot$gameLogic = function(_) {
     _.load(__basePath + 'entities/exit.js');
     _.load(__basePath + 'entities/water.js');
     _.load(__basePath + 'entities/mark.js');
+    _.load(__basePath + 'entities/speedUpMark.js');
     _.load(__basePath + 'entities/levelWall.js');
     _.load(__basePath + 'entities/spawn.js');
     _.load(__basePath + 'playerInfo.js');

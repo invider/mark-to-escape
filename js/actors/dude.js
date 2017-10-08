@@ -17,6 +17,7 @@ this['@dna/dude'] = function(_, dat) {
         w: 1,
         h: 1,
         speed: 1,
+        defaultSpeed: 1,
         direction: dat.direction,
 
         spawn: function() {
@@ -61,9 +62,17 @@ this['@dna/dude'] = function(_, dat) {
             ctx.drawImage(this._.res.player, -hw, -hh, 1, 1);
             ctx.restore()
         },
-
+        checkToKill:function(){
+            var walls = this._.lib.getObjectsAt(cell.getX() + this.direction.dx, cell.getY() + this.direction.dy)
+                .filter(o => o.type === constants.types.WALL)
+            if (walls.length){
+                this._.lib.selectUtils.detachObj(walls[0]);
+            }
+        },
         fixDirection: function() {
             if (!this.checkTargetCellFree()) {
+                this.checkToKill();
+                this.speed = this.defaultSpeed;
                 this.inverse()
                 if(!this.checkTargetCellFree()) {
                 	this.rotate()
