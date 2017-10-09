@@ -1,0 +1,6 @@
+#!/bin/sh
+
+rm -f *.zip
+
+zip -v -r mark-to-escape.zip . -x ".git*" -x ".DS_Store" -x "build"
+

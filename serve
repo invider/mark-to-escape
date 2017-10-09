@@ -1,0 +1,5 @@
+#!/bin/sh
+# start simple Python http server
+
+nohup python -m SimpleHTTPServer 8908 > server.log 2>&1&
+echo $! > server.pid

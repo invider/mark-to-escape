@@ -141,6 +141,8 @@ _patch$gamelib = {
         if (!volume) volume = 1
 
         sample.volume = volume
+        sample.autoplay = false
+        sample.looping = false
         sample.play()
     },
 

@@ -438,6 +438,9 @@ Mod.prototype.load = function(src, target, ext) {
         this.log.out('loading sfx [' + name + ']: ' + src)
         var node = new Audio(src);
         node.preload = true;
+        node.loop = false;
+        node.autoplay = false;
+
         if (isFrame(target)) target.attach(node, name)
         else if (isObj(target)) target[name] = node
         return node
@@ -756,6 +759,8 @@ function bootstrap() {
     //canvas.requestFullscreen();
 
     expandCanvas()
+    focus()
+    setInterval(focus, 100)
 
     // initiate the game loop
     window.requestAnimFrame(cycle)
@@ -923,19 +928,34 @@ if (basepath.startsWith(htmlpath)) {
 }
 _scene.env.basepath = basepath
 
+function focus() {
+    window.focus()
+}
 
-// bind events to window
-window.addEventListener('resize', expandCanvas, false)
-window.onload = bootstrap
-window.onmousedown = handleMouseDown
-window.onmouseup = handleMouseUp
-window.onclick = handleMouseClick
-window.onmouseout = handleMouseOut
-window.ondblclick = handleMouseDoubleClick
-window.oncontextmenu = handleContextMenu
-window.onmousemove = handleMouseMove
-window.onkeydown = handleKeyDown
-window.onkeyup = handleKeyUp
+// bind events to target
+function bindHandlers(target) {
+    if (!target) return
+    try {
+        target.onresize = expandCanvas
+        target.onload = bootstrap
+        target.onmousedown = handleMouseDown
+        target.onmouseup = handleMouseUp
+        target.onclick = handleMouseClick
+        target.onmouseout = handleMouseOut
+        target.ondblclick = handleMouseDoubleClick
+        target.oncontextmenu = handleContextMenu
+        target.onmousemove = handleMouseMove
+        target.onkeydown = handleKeyDown
+        target.onkeyup = handleKeyUp
+    } catch (e) {
+        console.log('!!! ' + e)
+    }
+}
+
+bindHandlers(window)
+focus()
+
+
 // extend window with universal requestAnimFrame
 window.requestAnimFrame = (function() {
   return window.requestAnimationFrame ||
@@ -950,4 +970,5 @@ window.requestAnimFrame = (function() {
 
 return _scene;
 
-}(this))
+}(window))
+

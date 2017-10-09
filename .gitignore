@@ -60,6 +60,14 @@ typings/
 .idea
 .project
 
+# generated packages
+*.zip
+*.tar
+
+# server artifacts
+.pid
+.log
+
 # MacOS X specific
 .DS_Store
 

@@ -30,7 +30,7 @@ const constants = {
     	RIGHT: 39,
     	SPACE: 32,
         ENTER: 13,
-        NEXT_LEVEL: 27,
+        NEXT_LEVEL: 112,
         SPAWN_MARK_UP: 49,
         SPAWN_MARK_DOWN: 50,
         SPAWN_MARK_LEFT: 51,
