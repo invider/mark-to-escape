@@ -3,7 +3,7 @@
     "env/player/markers/down=1\n"+
     "env/player/markers/speedUp=1\n"+
     "env/player/goal=1\n"+
-    "env/player/levelName=You shall not passsssssss!!!!!\n"+
+    "env/player/levelName=You shall not pass!!!\n"+
     "^^^SETTINGS^^^"+
     "M_z_@100" +
     "^^^MACROS^^^" +

@@ -6,11 +6,18 @@ this['@dna/playerInfo'] = function() {
 		evo: function(scene, dt) {
 
 		},
-		txt: function(ctx, text, levelInfo){
-            ctx.font = '48px zekton, impact, sans-serif';
-            ctx.fillStyle="#FF0000";
-            ctx.fillText(levelInfo, 10, 50);
-            ctx.fillText(text, 10, 90);
+		txt: function(ctx, text1, text2){
+            ctx.font = '32px kenney, impact, sans-serif';
+
+            ctx.fillStyle="#202020";
+            ctx.fillText(text1, 12, 37);
+            ctx.fillStyle="#E08040";
+            ctx.fillText(text1, 10, 35);
+
+            ctx.fillStyle="#202020";
+            ctx.fillText(text2, 12, 72);
+            ctx.fillStyle="#6080D0";
+            ctx.fillText(text2, 10, 70);
 		},
 		addVar: function(opts){
 			let v = opts.value === undefined ? this._.selectOne(opts.path): opts.value;
@@ -20,24 +27,21 @@ this['@dna/playerInfo'] = function() {
             return opts.caption + v + " ";
 		},
 		draw: function(ctx) {
-			let txt = "";
-            txt += this.addVar({caption: "RM:", path: constants.path.RIGHT_MARKERS_COUNT, number: 1});
-            txt += this.addVar({caption: "LM:", path: constants.path.LEFT_MARKERS_COUNT, number: 1});
-            txt += this.addVar({caption: "DM:", path: constants.path.DOWN_MARKERS_COUNT, number: 1});
-            txt += this.addVar({caption: "UM:", path: constants.path.UP_MARKERS_COUNT, number: 1});
-            txt += this.addVar({caption: "SM:", path: constants.path.SPEED_UP_MARKERS_COUNT, number: 1});
-            txt += this.addVar({caption: "RMM:", path: constants.path.REMOVE_MARKERS_COUNT, number: 1});
-            var spawned = this._.selectOneNumber(constants.path.DUDES_SPAWNED_COUNT);
-            var dead = this._.selectOneNumber(constants.path.DUDES_DEAD);
-            txt += this.addVar({caption: "Alive:", value: (spawned - dead) + "/" + spawned});
-            txt += this.addVar({caption: "Goal:", value: this._.selectOneNumber(constants.path.DUDES_ESCAPED) + "/" + this._.selectOneNumber(constants.path.GOAL)});
-            txt += this.addVar({caption: "LVL:", path: constants.path.PLAYER_LEVEL, number: 1});
+            let spawned = this._.selectOneNumber(constants.path.DUDES_SPAWNED_COUNT);
+            let dead = this._.selectOneNumber(constants.path.DUDES_DEAD);
+            let goal = this._.selectOneNumber(constants.path.GOAL)
+            let escaped = this._.selectOneNumber(constants.path.DUDES_ESCAPED)
+            let level = this._.selectOne(constants.path.PLAYER_LEVEL)
+            let levelName = this._.selectOne(constants.path.LEVEL_NAME)
 
-			// "env/player/markers/right=3\n"+
-            // "env/player/markers/down=2\n"+
-            // "env/player/markers/up=1\n"+
-            // "env/player/goal=10\n"+
-			this.txt(ctx, txt, this._.selectOne(constants.path.LEVEL_NAME));
+			let txt1 = "Level " + level + ":  " + levelName
+
+            let txt2 = ""
+            //txt += this.addVar({caption: "Alive:", value: (spawned - dead) + "/" + spawned});
+            txt2 += this.addVar({caption: "Goal: ", value:  escaped + "/" + goal });
+            txt2 += this.addVar({caption: " Walking: ", value:  spawned - escaped - dead });
+
+			this.txt(ctx, txt1, txt2);
 		}
 	})
 }

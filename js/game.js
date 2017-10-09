@@ -1,8 +1,3 @@
-// some boot actions
-_boot$game = function(_) {
-    _.log.out('boot game logic')
-}
-
 _setup$game = function(_) {
     _.log.out('setup game logic - copy to dna -> lab')
 

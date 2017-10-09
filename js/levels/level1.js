@@ -2,7 +2,7 @@
     "env/player/markers/right=1\n"+
     "env/player/markers/down=1\n"+
     "env/player/goal=1\n"+
-    "env/player/levelName=TestLevel\n"+
+    "env/player/levelName=First Exit\n"+
     "env/player/markers/speedUp=1\n"+
     "env/player/markers/remove=1\n"+
     "^^^SETTINGS^^^"+

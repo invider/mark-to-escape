@@ -3,7 +3,7 @@
     "env/player/markers/down=2\n"+
     "env/player/markers/up=1\n"+
     "env/player/goal=10\n"+
-    "env/player/levelName=WTF?!?!\n"+
+    "env/player/levelName=Where am I?!?!\n"+
     "^^^SETTINGS^^^"+
     "^^^MACROS^^^" +
     "*****************************************************\n" +
