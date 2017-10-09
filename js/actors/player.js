@@ -139,7 +139,6 @@ this['@dna/player'] = function(_, dat) {
     
             if (toSpawn){
                 if (toSpawn === constants.objects.restartMark){
-                    debugger;
                     this._.lib.restartLevel();
                 } else if (toSpawn === constants.objects.removeMark){
                     let mark = this.removeMarksAt(this.x, this.y);
