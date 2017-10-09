@@ -5,6 +5,7 @@ this['@dna/player'] = function(_, dat) {
     var lastKey = (function(key) {
     	var keys = [
     		constants.keyCodes.SPACE,
+    		constants.keyCodes.ENTER,
             constants.keyCodes.NEXT_LEVEL,
     		constants.keyCodes.LEFT, 
     		constants.keyCodes.UP, 
@@ -121,7 +122,8 @@ this['@dna/player'] = function(_, dat) {
             if(scene.env.keys[constants.keyCodes.NEXT_LEVEL]) {
                 this._.lib.spawnNextLevel();
                 delete scene.env.keys[constants.keyCodes.NEXT_LEVEL];
-            } else if(lastKey.value() == constants.keyCodes.SPACE) {
+            } else if(lastKey.value() == constants.keyCodes.SPACE
+                    || lastKey.value() == constants.keyCodes.ENTER) {
             	toSpawn = this._.env.player.currentMark;
             	if(toSpawn == constants.objects.leftMark) {
             		toCheck = constants.path.LEFT_MARKERS_COUNT;

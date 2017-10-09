@@ -3,6 +3,12 @@
  * @param lvl {number} level number
  */
 this['@lib/spawnLevel'] = function(lvl){
+    this._.patch(this._, constants.path.PLAYER_LEVEL, lvl);
+    var lvlData = this._.selectOne("lib/levels/level" + lvl);
+    if (!lvlData){
+        //throw new Error("No such level:" + lvl);
+        return
+    }
     this._.lib.clearLevel();
     var my = this;
     var typeMap = {
@@ -21,11 +27,6 @@ this['@lib/spawnLevel'] = function(lvl){
         'D': 'downMark',
         'X': 'exit'
     };
-    this._.patch(this._, constants.path.PLAYER_LEVEL, lvl);
-    var lvlData = this._.selectOne("lib/levels/level" + lvl);
-    if (!lvlData){
-        throw new Error("No such level:" + lvl);
-    }
     return this._.lib.parser.parse(lvlData, function(x, y, type, params, param) {
         let dna = typeMap[type];
         if (dna){

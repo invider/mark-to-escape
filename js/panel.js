@@ -24,7 +24,7 @@ this['@dna/panel'] = function(_) {
 		img: _.res.speedupMark,
 		value : constants.objects.speedUpMark,
 		path : constants.path.SPEED_UP_MARKERS_COUNT,
-        info: 'Speed Up',
+        info: 'Mark Speed Up',
 	},
 	{
 		img: _.res.removeMark,
@@ -54,7 +54,8 @@ this['@dna/panel'] = function(_) {
 		name : 'panel',
 
 		evo : function() {
-			if (scene.env.keys[constants.keyCodes.TAB]) {
+			if (scene.env.keys[constants.keyCodes.TAB]
+			    || scene.env.keys[constants.keyCodes.SHIFT]) {
 				var t = new Date().getTime()
 				if (t > time + 300) {
 					menu.next()
@@ -72,8 +73,14 @@ this['@dna/panel'] = function(_) {
 
 			for ( var i in items) {
 				var v = items[i];
-				ctx.fillStyle = v.selected ? '#ff0000' : v.canSelect() ? '#0000ff' : 'grey'
+				ctx.fillStyle = v.selected ? '#d0ff40' : v.canSelect() ? '#6040d0' : 'grey'
 				ctx.fillRect(x, y, w, w)
+
+                let z = 4
+                let z2 = z * 2
+				ctx.fillStyle = '#8090d0'
+				ctx.fillRect(x+is/2-z, y+is/2-z, w-is+z2, w-is+z2)
+                ctx.imageSmoothingEnabled = false
 				ctx.drawImage(items[i].img, x + is/2, y + is/2, w - is, w - is);
 				x += w + s
 
